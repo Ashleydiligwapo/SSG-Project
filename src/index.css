@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+margin: 0;
+
+  scroll-behavior: smooth;
+}
+.each-slide  {
+   display: flex;
+   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+   justify-content: center;
+   height: 600px;
+   flex-wrap: nowrap;
+   flex-direction: column;
+   align-items: center;
+   max-width: 50%;
+ }
+.each-slide>div img {
+  width: 100%;
+  height: 100%;
+ 
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./src/assets/ssg-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300&family=Source+Code+Pro:wght@200&display=swap"
+  rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Code+Pro:wght@200&display=swap"
+  rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@600&family=Source+Code+Pro:wght@200&display=swap"
+  rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@600&family=Roboto+Mono&family=Source+Code+Pro:wght@200&display=swap"
+  rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&family=Raleway:wght@600&family=Roboto+Mono&family=Source+Code+Pro:wght@200&display=swap"
+  rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Quicksand&display=swap" rel="stylesheet">
+    <title>SSG-Ctu-Danao</title>
+  <link href="/dist/output.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      // You can also pass an optional settings object
+      // below listed default settings
+      AOS.init({
+        offset: 120, // offset (in px) from the original trigger point
+        delay: 0, // values from 0 to 3000, with step 50ms
+        easing: 'ease', // default easing for AOS animations
+        duration: 400, // values from 0 to 3000, with step 50ms
+        disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+        once: false, // whether animation should happen only once - while scrolling down
+        mirror: false, // whether elements should animate out while scrolling past them
+        startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+        animatedClassName: 'aos-animate', // class applied on animation
+        initClassName: 'aos-init', // class applied after initialization
+        useClassNames: false // if true, will add content of `data-aos` as classes on scroll
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,420 @@
+[
+          {
+          "Ex_id": 1,
+          "name": "Hon. Marlon Mata",
+          "position": "SSG Adviser",
+          "imageUrl": "https://imageupload.io/ib/xd1DSxEexYeQQQz_1700394617.jpg",
+          "link": "https://www.facebook.com/profile.php?id=100008514518337",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "isExecutive": true
+         },
+
+
+
+        
+
+         {
+          "E_id": 1,
+          "name": "Hon. A.j. Gabriel Matugas",
+          "position": "President",
+          "imageUrl": "https://imageupload.io/ib/Bwu8cL0zK0pGqmo_1700401804.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/aj.matugas"
+        },
+          {
+          "E_id": 2,
+          "name": "Hon. Jessie Cambaya",
+          "position": "Vice President",
+          "imageUrl": "https://imageupload.io/ib/5gYZkLHUVEoMRjQ_1695745534.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/profile.php?id=100008514518337"
+        },
+           {
+          "E_id": 3,
+          "name": "Hon. Shania Kimberly QuiÑo",
+          "position": "General Secretary",
+          "imageUrl": "https://imageupload.io/ib/iiRS0W5qnimM1Lu_1695745962.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/shaniaquino.7"
+        },
+         {
+          "E_id": 4,
+          "name": "Hon. Cherry Mae Capul",
+          "position": "Treasurer",
+          "imageUrl": "https://imageupload.io/ib/IIjt2vKG12KnZHe_1700392978.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/cherymae.capul.7"
+        },
+          {
+          "E_id": 5,
+          "name": "Hon. Mae Ann Villanueva",
+          "position": "Auditor",
+          "imageUrl": "https://imageupload.io/ib/vugkEOLc4Cc6AQi_1700391439.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/maeann.villanueva.140"
+        },
+          {
+          "E_id": 6,
+          "name": "Hon. Kint Armero",
+          "position": "BEED Representative",
+          "imageUrl": "https://imageupload.io/ib/8fls1M6IDpnBlK4_1700394300.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/profile.php?id=61551821034854"
+        },
+        {
+          "E_id": 7,
+          "name": "Hon. Aiken Bugtai",
+          "position": "BSED Representative",
+          "imageUrl": "https://imageupload.io/ib/n3lFX9MheLHTh4G_1700391111.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/aiken.bugtai"
+        },
+         {
+          "E_id": 8,
+          "name": "Hon. Juniel Saligue",
+          "position": "CME Day Representative",
+          "imageUrl": "https://imageupload.io/ib/CtKobbPM0sbGyT0_1700391200.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/jocelyn.saligue.3"
+        },
+        {
+          "E_id": 9,
+          "name": "Hon. Carlo Denoy",
+          "position": "CME Night Representative",
+          "imageUrl": "https://imageupload.io/ib/HxLIVBZd8snwDLi_1700391019.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/carlodenoy.02"
+        },
+          {
+          "E_id": 10,
+          "name": "Hon. Dannah Kaye Amancio",
+          "position": "COEN Day Representative",
+          "imageUrl": "https://imageupload.io/ib/VtM3HE9zteiRgAD_1700391170.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/dannahkaye.amancio"
+        },
+          {
+          "E_id": 11,
+          "name": "Hon. Kein Cedrick Napone",
+          "position": "COT Day Representative",
+          "imageUrl": "https://imageupload.io/ib/iOOsEH7dmnf8UXG_1700393005.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/si.drake18"
+        },
+           {
+          "E_id": 12,
+          "name": "Hon. Gwynn Marieneth Matas",
+          "position": "COT Night Representative",
+          "imageUrl": "https://imageupload.io/ib/Ug11bz6TJh0uWS6_1700390974.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/GwynnHernandez74"
+        },
+         {
+          "E_id": 12,
+          "name": "Hon. Edsel Mata",
+          "position": "House Speaker",
+          "imageUrl": "https://imageupload.io/ib/1HMGqf9QOPYho1i_1700405311.jpg",
+          "isElected": true,  
+          "isGovernors": false,
+          "isAppointed": false,
+          "link": "https://www.facebook.com/edselmata2"
+        },
+
+
+
+
+
+          {
+          "G_id": 1,
+          "name": "Hon. Charmaine Serato",
+          "position": "COT Governor",
+          "imageUrl": "https://imageupload.io/ib/wrgA2KG28Ypho4B_1695746074.jpg",
+          "isElected": false,  
+          "isGovernors": true,
+          "isAppointed": false,
+           "link": "https://www.facebook.com/serato.charmaine"
+        },
+         {
+          "G_id": 2,
+          "name": "Hon. John Philip Maglangit",
+          "position": "COEN Governor",
+          "imageUrl": "https://imageupload.io/ib/882oDgvadSFD8CZ_1695746112.jpg",
+          "isElected": false,  
+          "isGovernors": true,
+          "isAppointed": false,
+           "link": "https://www.facebook.com/johnphilip.maglangit"
+        },
+          {
+          "G_id": 3,
+          "name": "Hon. Jojie Timothy Oroceo",
+          "position": "CME Governor",
+          "imageUrl": "https://scontent.fmnl9-1.fna.fbcdn.net/v/t39.30808-6/365905363_3562416577323470_5921533239484399518_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFSd2dLMH5SxKkKW2FI-Rgk_xWXRGVknu3_FZdEZWSe7QtuLVmMob1SBSmzZxdSyPXhOgbqvoh50FA2zuJJuO_R&_nc_ohc=CMeFKNLDKv8AX-0IRrr&_nc_ht=scontent.fmnl9-1.fna&oh=00_AfAABTIvQYfhE7icJaOZRXuoJIjMa0m2JLm_0672v8wDDw&oe=655F33B7",
+          "isElected": false,  
+          "isGovernors": true,
+          "isAppointed": false,
+           "link": "https://www.facebook.com/ejeyts"
+        },
+        {
+          "G_id": 4,
+          "name": "Hon. Ranex Cambio",
+          "position": "CEAS Governor",
+          "imageUrl": "https://imageupload.io/ib/dSvdl57IZBLoYzd_1700406134.jpg",
+          "isElected": false,  
+          "isGovernors": true,
+          "isAppointed": false,
+           "link": "https://www.facebook.com/ranex.cambio.9"
+        },
+
+
+          {
+          "A_id": 1,
+          "name": "Hon. Nino James Lumay",
+          "position": "Executive Secretary",
+          "imageUrl": "https://imageupload.io/ib/EByfKaCoFZVsChZ_1695821998.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/jade.jang.39"
+        },
+           {
+          "A_id": 2,
+          "name": "Hon. Diana Rose Lacio",
+          "position": "Legislative Secretary",
+          "imageUrl": "https://imageupload.io/ib/hh8nYcY2qSqeTiN_1695746566.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/dianarose.lacio"
+        }
+        ,
+           {
+          "A_id": 3,
+          "name": "Hon. Sofia Gonzales",
+          "position": "Secretary of Networks & Linkages",
+          "imageUrl": "https://imageupload.io/ib/IAsT3SpWLqem4ac_1695746654.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/doomwiss"
+        }
+        ,
+           {
+          "A_id": 4,
+          "name": "Hon. Jemimah Keziah Codino",
+          "position": "Secretary of Events",
+          "imageUrl": "https://imageupload.io/ib/bJ9JECcxtFLVdLl_1700391301.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/keziah.codino"
+        }
+        ,
+           {
+          "A_id": 5,
+          "name": "Hon. Mary Ann Laurente",
+          "position": "Public Relation Officer",
+          "imageUrl": "https://imageupload.io/ib/mYU0TWIJ2PkMuxy_1700392921.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/laurente.maryann.03"
+        }
+         ,
+           {
+          "A_id": 6,
+          "name": "Hon. Nina Mitzi Rose Cordovan",
+          "position": "Public Relation Officer",
+          "imageUrl": "https://imageupload.io/ib/3v8yoF3UpO2VLI9_1700391357.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/ninamitziros"
+        },
+           {
+          "A_id": 7,
+          "name": "Hon. Janeth Coyoca",
+          "position": "Public Relation Officer",
+          "imageUrl": "https://imageupload.io/ib/9RTtUrl6zDHzBx2_1700391381.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/jahkoyoka"
+        },
+           {
+          "A_id": 8,
+          "name": "Hon. Vernice Marie Canania",
+          "position": "Public Relation Officer",
+          "imageUrl": "https://imageupload.io/ib/B1FIt2MBCXxCrXd_1700391410.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/vernicemarie.canania"
+        },
+           {
+          "A_id": 9,
+          "name": "Hon. Gian Gareth Obial",
+          "position": "Multimedia Director",
+          "imageUrl": "https://imageupload.io/ib/jVUJmw7BOJk8uRL_1700392418.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/profile.php?id=100077396486210"
+        },
+           {
+          "A_id": 10,
+          "name": "Hon. Albert Vincent Kilaton",
+          "position": "Multimedia Officer",
+          "imageUrl": "https://imageupload.io/ib/JOBCF0Lq7pSX4qM_1700392385.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/kilaton.albertvincent"
+        },
+           {
+          "A_id": 11,
+          "name": "Hon. Joshua Del Campo",
+          "position": "Multimedia Officer",
+          "imageUrl": "https://imageupload.io/ib/cq40BBhRUnZBcGw_1700392943.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/joshua.delcampo.j"
+        },
+           {
+          "A_id": 12,
+          "name": "Hon. Shane Nicole Quino",
+          "position": "Asst. Multimedia Officer",
+          "imageUrl": "https://imageupload.io/ib/MVGhYWJEJnguB1C_1700393219.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/shanenicole.quino"
+        },
+           {
+          "A_id": 13,
+          "name": "Hon. Keisha Catana",
+          "position": "Multimedia Officer",
+          "imageUrl": "https://imageupload.io/ib/VWlI6DbLEzsM85n_1700393443.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/ksh.catana"
+        },
+           {
+          "A_id": 14,
+          "name": "Hon. Junnick Meca",
+          "position": "Multimedia Officer",
+          "imageUrl": "https://imageupload.io/ib/TmZyyChpZL8i9Fm_1700394351.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/junnick.meca"
+        },
+           {
+          "A_id": 15,
+          "name": "Hon. Eliezer Ghabe Gonzales",
+          "position": "Multimedia Officer",
+          "imageUrl": "https://imageupload.io/ib/912BJFvMlrGQvQ6_1700394368.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/yokaidaa"
+        },
+           {
+          "A_id": 16,
+          "name": "Hon. Charlie Rivera",
+          "position": "Multimedia Officer",
+          "imageUrl": "https://imageupload.io/ib/PkELirRAbMNOXAR_1700391469.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/charlieshane.rivera"
+        },
+           {
+          "A_id": 17,
+          "name": "Hon. Ashley Rodriguez",
+          "position": "Activity Officer",
+          "imageUrl": "https://imageupload.io/ib/v1N4NBsSeWqZC5b_1695662480.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/ashleydiligwapo/"
+        },
+           {
+          "A_id": 18,
+          "name": "Hon. Sem Montecillo",
+          "position": "Activity Officer",
+          "imageUrl": "https://imageupload.io/ib/QtqRbOEK35w0caF_1700391560.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/xinsie2"
+        },
+           {
+          "A_id": 19,
+          "name": "Hon. Khient Louie Gacita",
+          "position": "Activity Officer",
+          "imageUrl": "https://imageupload.io/ib/tmQslMlTxlZVV7Z_1700391496.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/j09355699217"
+        },
+           {
+          "A_id": 20,
+          "name": "Hon. Ranelle Capuyan",
+          "position": "Activity Officer",
+          "imageUrl": "https://imageupload.io/ib/btovQqBbvCVfNuO_1700391088.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/capuyanranell"
+        },
+           {
+          "A_id": 21,
+          "name": "Hon. Joel Nino Pabadora",
+          "position": "Activity Officer",
+          "imageUrl": "https://imageupload.io/ib/DXucm2pyGcwbScr_1700392347.jpg",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/leoj.arodabap"
+        },
+           {
+          "A_id": 22,
+          "name": "Hon. Jake Hermosilla",
+          "position": "Activity Officer",
+          "imageUrl": "https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/312911355_1270835923769498_5799004844875814609_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGqKJhq3dRX7jrAdHQmPiKLzcEG71f6wvXNwQbvV_rC9ctUqHtALgNfbCeELdjikXKHhh9cG59FQxynpPHQh-CA&_nc_ohc=BBYCFQJS23sAX-VEt2C&_nc_ht=scontent.fceb2-1.fna&oh=00_AfBlf9cEqYLQOWUjYKKq6W5TdKKMrx7BxGz4vcHYP0s3wQ&oe=655EBCA1",
+          "isElected": false,  
+          "isGovernors": false,
+          "isAppointed": true,
+           "link": "https://www.facebook.com/jake.hermosilla.2"
+        }
+        
+]
