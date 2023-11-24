@@ -32,7 +32,9 @@ import { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { MdOutlineLogout, MdLogin } from "react-icons/md";
 import { useEffect } from "react";
+
 export default function Navigation() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isAuth, setIsAuth] = useState(false);
@@ -49,7 +51,7 @@ export default function Navigation() {
     signOut(auth).then(() => {
       localStorage.clear();
       setIsAuth(false);
-      window.location.pathname = "/login";
+      window.location.pathname = "/";
     });
   };
 
@@ -83,11 +85,13 @@ export default function Navigation() {
 
             <MenuBar />
             {!isAuth ? (
-              <Link to="/login">Log in</Link>
+              <div></div>
             ) : (
               <>
-                <button onClick={signUserOut}>Log out</button>
                 <Link to="/PostCreate">Post</Link>
+                <Button onClick={signUserOut}>
+                  <MdOutlineLogout />
+                </Button>
               </>
             )}
           </HStack>

@@ -11,8 +11,11 @@ import Home from "./pages/Home";
 import Login from "./pages/login";
 import PostCreate from "./pages/PostCreate";
 import Board from "./pages/Board";
+import Footer from "./components/Footer";
 import FreedomCode from "./pages/FreedomCode";
 import CreateBoard from "./pages/CreateBoard";
+import MenuBar from "./components/MenuBar";
+import Lanyards from "./pages/Lanyards";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -26,9 +29,14 @@ function App() {
         <Route path="/Board" element={<Board />} />
         <Route path="/FreedomCode" element={<FreedomCode isAuth={isAuth} />} />
         <Route path="/PostCreate" element={<PostCreate isAuth={isAuth} />} />
-
+        <Route path="/Footer" element={<Footer setIsAuth={setIsAuth} />} />
         <Route path="/CreateBoard" element={<CreateBoard isAuth={isAuth} />} />
+        <Route path="/MenuBar" element={<MenuBar isAuth={isAuth} />} />
+        <Route path="/Lanyards" element={<Lanyards />} />
       </Routes>
+      <div>
+        <Footer />
+      </div>
     </Router>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import {
   Menu,
   MenuButton,
@@ -10,9 +10,18 @@ import {
   MenuDivider,
   Button,
 } from "@chakra-ui/react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { auth } from "../firebase";
 function MenuBar() {
+  const [isAuth, setIsAuth] = useState(false);
+  const [user] = useAuthState(auth);
+  useEffect(() => {
+    if (user) {
+      setIsAuth(user.email === "ashley.rodriguez@ctu.edu.ph");
+    }
+  }, [user]);
   return (
     <div>
       <Menu>
@@ -23,8 +32,9 @@ function MenuBar() {
           <MenuItem>
             <Link to="/Board">SSG - Officers</Link>
           </MenuItem>
+          <MenuItem>University - Merch</MenuItem>
           <MenuItem>
-            <Link to="/FreedomCode">Freedom Code</Link>
+            <Link to="/Lanyads">Lanyards</Link>
           </MenuItem>
         </MenuList>
       </Menu>
@@ -53,8 +63,15 @@ function MenuBar() {
           More
         </MenuButton>
         <MenuList>
-          <MenuItem>SSG - Merch</MenuItem>
-          <MenuItem>Lanyards</MenuItem>
+          {!isAuth ? (
+            <></>
+          ) : (
+            <>
+              <MenuItem>
+                <Link to="/FreedomCode">Freedom Code</Link>
+              </MenuItem>
+            </>
+          )}
         </MenuList>
       </Menu>
     </div>

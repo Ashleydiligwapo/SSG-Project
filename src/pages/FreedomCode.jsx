@@ -65,7 +65,6 @@ function FreedomCode({ isAuth }) {
           </figure>
         </article>
       </main>
-      <Footer />
     </div>
   );
 }

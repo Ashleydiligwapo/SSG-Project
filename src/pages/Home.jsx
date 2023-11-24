@@ -140,7 +140,6 @@ function Home({ isAuth }) {
           </article>
         )}
       </main>
-      <Footer />
     </>
   );
 }
