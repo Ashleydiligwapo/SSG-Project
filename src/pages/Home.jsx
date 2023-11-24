@@ -67,7 +67,9 @@ function Home({ isAuth }) {
       <main className="bg-cover bg-gradient-to-br from-[#224866] via-[#073255] to-[#051431]">
         <Background />
         <ChakraSlider />
-        <h1 className="text-center text-white">Events</h1>
+        <h1 className="text-center py-4 text-4xl text-white font-quicksand">
+          EVENTS
+        </h1>
 
         {isLoading ? (
           <center class="pt-5 py-6">

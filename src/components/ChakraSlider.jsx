@@ -30,21 +30,18 @@ function ChakraSlider() {
   const cards = [
     {
       title: "Services and Leaderships",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image:
-        "https://images.unsplash.com/photo-1516796181074-bf453fbfa3e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
+      text: "The CTU Danao - SSG is the highest governing council, dedicated to serving the student body's collective interests by organizing programs, projects, and activities, as well as serving as a liaison between the school administration and the student body to meet the needs of a better campus life. ",
+      image: "https://f005.backblazeb2.com/file/MERN-Project/OFFICERS/ssg1.jpg",
     },
     {
       title: "Services and Leaderships",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image:
-        "https://images.unsplash.com/photo-1438183972690-6d4658e3290e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2274&q=80",
+      image: "https://f005.backblazeb2.com/file/MERN-Project/OFFICERS/ssg2.jpg",
     },
     {
       title: "Services and Leaderships",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image:
-        "https://images.unsplash.com/photo-1507237998874-b4d52d1dd655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
+      image: "https://f005.backblazeb2.com/file/MERN-Project/OFFICERS/ssg3.jpg",
     },
   ];
   return (
@@ -70,7 +67,10 @@ function ChakraSlider() {
         aria-label="left-arrow"
         variant="ghost"
         position="absolute"
+        background={"blackAlpha.600"}
+        color={"white"}
         left={side}
+        px={2}
         top={top}
         transform={"translate(0%, -50%)"}
         zIndex={2}
@@ -83,6 +83,9 @@ function ChakraSlider() {
         aria-label="right-arrow"
         variant="ghost"
         position="absolute"
+        background={"blackAlpha.600"}
+        px={2}
+        color={"white"}
         right={side}
         top={top}
         transform={"translate(0%, -50%)"}
@@ -95,8 +98,9 @@ function ChakraSlider() {
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {cards.map((card, index) => (
           <Box
+            className=" font-quicksand"
             key={index}
-            height={"6xl"}
+            height={"1xl"}
             position="relative"
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
@@ -106,17 +110,26 @@ function ChakraSlider() {
             {/* This is the block you need to change, to customize the caption */}
             <Container size="container.lg" height="600px" position="relative">
               <Stack
-                spacing={6}
+                spacing={7}
                 w={"full"}
-                maxW={"lg"}
+                maxW={"4xl"}
                 position="absolute"
                 top="50%"
                 transform="translate(0, -50%)"
               >
-                <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
-                  {card.title}
+                <Heading
+                  fontSize={{ base: "3xl", md: "4xl", lg: "4xl" }}
+                  color="gold"
+                >
+                  <Text className=" font-bebas tracking-wider">
+                    {card.title}
+                  </Text>
                 </Heading>
-                <Text fontSize={{ base: "md", lg: "lg" }} color="GrayText">
+                <Text
+                  className="text-lg tracking-normal"
+                  fontSize={{ base: "lg", lg: "2xl" }}
+                  color="white"
+                >
                   {card.text}
                 </Text>
               </Stack>
