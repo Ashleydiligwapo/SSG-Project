@@ -57,8 +57,7 @@ export default function Navigation() {
 
   return (
     <Box
-      className="font-poppins"
-      bg={useColorModeValue("gray.100", "gray.200")}
+      className="font-poppins bg-gradient-to-r from-[#ec8405] to-[#e2a75e]"
       px={7}
     >
       <Flex h={16} as="header" align="center" justify="space-between">
@@ -67,7 +66,7 @@ export default function Navigation() {
           icon={isOpen ? <SideDrawer /> : <SideDrawer />}
           aria-label={"Open Menu"}
           onClick={isOpen ? onClose : onOpen}
-          display={{ md: "none" }}
+          display={{ lg: "none" }}
         />
 
         <HStack spacing={2} alignItems={"center"}>
@@ -80,7 +79,11 @@ export default function Navigation() {
         </HStack>
 
         <Flex alignItems={"center"}>
-          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+          <HStack
+            as={"nav"}
+            spacing={4}
+            display={{ base: "none", md: "none", lg: "flex" }}
+          >
             <Link to="/">Home</Link>
 
             <MenuBar />

@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import bg from "../assets/bcimage.jpg";
+import { FaCaretDown } from "react-icons/fa";
+import { IoCaretUpSharp, IoCaretDownOutline } from "react-icons/io5";
 function Home({ isAuth }) {
   const [lists, setLists] = useState([]); //MERN data items
   const [postLists, setPostLists] = useState([]); //FireStore or firebase data
@@ -62,6 +64,11 @@ function Home({ isAuth }) {
       });
     });
   });
+
+  const [showMore, setShowMore] = useState(false);
+  const toggleShowMore = (id) => {
+    setShowMore({ ...showMore, [id]: !showMore[id] });
+  };
   return (
     <>
       <main className="bg-cover bg-gradient-to-br from-[#224866] via-[#073255] to-[#051431]">
@@ -104,21 +111,23 @@ function Home({ isAuth }) {
         ) : (
           <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-5xl">
             <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
-              {lists.map((post) => {
-                return (
-                  <ul>
-                    <figure
-                      data-aos="fade-up"
-                      className="rounded-xl m-6 bg-gradient-to-r from-[#eec64d] via-[#ebd650] to-[#ce9b02] font-quicksand my-10 rounded-x ssm:pb-5 ssm:text-center sm:max-h-full sm:pb-5 sm:text-center md:pb-1 "
-                      key={post._id}
-                    >
-                      <li>
-                        <a href={post.HreF} target="_blank">
-                          <img
-                            className="max-h-full w-full object-cover rounded-xl md:h-full "
-                            src={post.images}
-                            alt={`Image ${post.id}`}
-                          />
+              {lists
+                .map((post) => {
+                  return (
+                    <ul>
+                      <figure
+                        data-aos="fade-up"
+                        className="rounded-xl m-6 bg-gradient-to-r from-[#eec64d] via-[#ebd650] to-[#ce9b02] font-quicksand my-10 rounded-x ssm:pb-5 ssm:text-center sm:max-h-full sm:pb-5 sm:text-center md:pb-1 "
+                        key={post._id}
+                      >
+                        <li>
+                          <a href={post.HreF} target="_blank">
+                            <img
+                              className="max-h-full w-full object-cover rounded-xl md:h-full "
+                              src={post.images}
+                              alt={`Image ${post.id}`}
+                            />
+                          </a>
                           <div className="font-poppins ssm:p-5 sm:text-left md:p-5">
                             <p className="font-bold text-slate-900">
                               {post.title}{" "}
@@ -126,18 +135,28 @@ function Home({ isAuth }) {
                             <p className="text-xs font-thin italic mb-4">
                               {post.Date}
                             </p>
+                            {showMore[post._id]
+                              ? post.PostText
+                              : `${post.PostText.slice(0, 400)}`}
 
-                            <p className="font-quicksand">
-                              " {post.PostText} "
-                            </p>
+                            <button
+                              className="px-4"
+                              onClick={() => toggleShowMore(post._id)}
+                            >
+                              {showMore[post._id] ? (
+                                <IoCaretUpSharp />
+                              ) : (
+                                <IoCaretDownOutline />
+                              )}
+                            </button>
                           </div>
-                        </a>
-                      </li>
-                    </figure>
-                    ;
-                  </ul>
-                );
-              })}
+                        </li>
+                      </figure>
+                      ;
+                    </ul>
+                  );
+                })
+                .reverse()}
             </article>
           </article>
         )}

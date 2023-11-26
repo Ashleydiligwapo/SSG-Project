@@ -25,7 +25,12 @@ function MenuBar() {
   return (
     <div>
       <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+        <MenuButton
+          mx={1}
+          bg={"#e2a75e"}
+          as={Button}
+          rightIcon={<ChevronDownIcon />}
+        >
           About
         </MenuButton>
         <MenuList>
@@ -39,7 +44,12 @@ function MenuBar() {
         </MenuList>
       </Menu>
       <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+        <MenuButton
+          mx={1}
+          bg={"#e2a75e"}
+          as={Button}
+          rightIcon={<ChevronDownIcon />}
+        >
           Organizations
         </MenuButton>
         <MenuList>
@@ -49,8 +59,13 @@ function MenuBar() {
         </MenuList>
       </Menu>
       <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          Projects
+        <MenuButton
+          mx={1}
+          bg={"#e2a75e"}
+          as={Button}
+          rightIcon={<ChevronDownIcon />}
+        >
+          Services
         </MenuButton>
         <MenuList>
           <MenuItem>Project 1</MenuItem>
@@ -59,7 +74,12 @@ function MenuBar() {
         </MenuList>
       </Menu>
       <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+        <MenuButton
+          mx={1}
+          bg={"#e2a75e"}
+          as={Button}
+          rightIcon={<ChevronDownIcon />}
+        >
           More
         </MenuButton>
         <MenuList>

@@ -20,8 +20,8 @@ function background() {
             }}
           >
             <FancyText
-              className="text-5xl font-bold font-bebos tracking-wide"
-              gradient={{ from: "#fff8af", to: "#3362d6" }}
+              className="text-5xl font-bold font-bebos tracking-wide "
+              gradient={{ from: "#ff7300", to: "#d6bc33" }}
               animate
               animateDuration={1200}
             >
