@@ -5,46 +5,43 @@ import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { auth, db, storage } from "../firebase";
 import { listAll, getDownloadURL, ref } from "firebase/storage";
 import Footer from "../components/Footer";
+import ShowMoreText from "react-show-more-text";
 import {
   Skeleton,
   SkeletonCircle,
   SkeletonText,
   Box,
   Stack,
+  Button,
 } from "@chakra-ui/react";
 import axios from "axios";
 import bg from "../assets/bcimage.jpg";
 import { FaCaretDown } from "react-icons/fa";
 import { IoCaretUpSharp, IoCaretDownOutline } from "react-icons/io5";
+
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  useToast,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 function Home({ isAuth }) {
   const [lists, setLists] = useState([]); //MERN data items
-  const [postLists, setPostLists] = useState([]); //FireStore or firebase data
-
-  const [imageLists, setImageLists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [updatedLists, setUpdatedLists] = useState([]);
   const apiURL = "http://localhost:8001/api/lists";
-
-  const imagesListRef = ref(storage, "HomePageImages/");
-  useEffect(() => {
-    const postsCollectionRef = collection(db, "Posts");
-    const getPosts = async () => {
-      try {
-        const data = await getDocs(postsCollectionRef);
-        setPostLists(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error firebase:", error);
-        setIsLoading(false);
-      }
-    };
-    getPosts();
-  });
-
+  const updateModal = useDisclosure();
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(apiURL);
         setLists(response.data);
+        setUpdatedLists(response.data);
         setIsLoading(false);
         console.log(lists);
       } catch (error) {
@@ -55,20 +52,6 @@ function Home({ isAuth }) {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    listAll(imagesListRef).then((res) => {
-      res.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageLists();
-        });
-      });
-    });
-  });
-
-  const [showMore, setShowMore] = useState(false);
-  const toggleShowMore = (id) => {
-    setShowMore({ ...showMore, [id]: !showMore[id] });
-  };
   return (
     <>
       <main className="bg-cover bg-gradient-to-br from-[#224866] via-[#073255] to-[#051431]">
@@ -77,7 +60,25 @@ function Home({ isAuth }) {
         <h1 className="text-center py-4 text-4xl text-white font-quicksand">
           EVENTS
         </h1>
-
+        <Modal
+          blockScrollOnMount={false}
+          isOpen={updateModal.isOpen}
+          onClose={updateModal.onClose}
+          isCentered
+        >
+          {" "}
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader className="text-center">
+              Sign in to Google.
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={10} className="text-center">
+              <Box></Box>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+        <Button onClick={updateModal.onOpen}></Button>
         {isLoading ? (
           <center class="pt-5 py-6">
             <Stack width="80%">
@@ -130,25 +131,20 @@ function Home({ isAuth }) {
                           </a>
                           <div className="font-poppins ssm:p-5 sm:text-left md:p-5">
                             <p className="font-bold text-slate-900">
-                              {post.title}{" "}
+                              {post.title}
                             </p>
                             <p className="text-xs font-thin italic mb-4">
                               {post.Date}
                             </p>
-                            {showMore[post._id]
-                              ? post.PostText
-                              : `${post.PostText.slice(0, 400)}`}
 
-                            <button
-                              className="px-4"
-                              onClick={() => toggleShowMore(post._id)}
+                            <ShowMoreText
+                              lines={7}
+                              className="content-css "
+                              less={<IoCaretUpSharp />}
+                              more={<IoCaretDownOutline />}
                             >
-                              {showMore[post._id] ? (
-                                <IoCaretUpSharp />
-                              ) : (
-                                <IoCaretDownOutline />
-                              )}
-                            </button>
+                              {post.PostText}
+                            </ShowMoreText>
                           </div>
                         </li>
                       </figure>

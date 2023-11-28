@@ -17,38 +17,35 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 
+const officersLists = mongoose.Schema({
+        name: String,
+        facebook: String,
+        image: String,
+        isActOfficer: Boolean,
+        isPresident: Boolean,
+        isVP: Boolean,
+        isGeneralSec: Boolean,
+        isTreasurer: Boolean,
+        isAdviser: Boolean,
+        isElected: Boolean,
+        isGovernors: Boolean,
+        isAppointed: Boolean
+});
+const Officers = mongoose.model('Officers',officersLists);
 
 
-
+///////                  Lists data         ///////////
 //this is to fetch the data from mongoo db
 app.get("/api/lists", async (req, res) => {
     try {
         const data = await Lists.find({});
         res.json(data);
     } catch(error){
-        res.status(500).json({error: "Error Fetching Books."});
+        res.status(500).json({error: "Error Fetching."});
     };
 });
-
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/')
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null,  uniqueSuffix + "-" + file.originalname);
-  }
-})
-
-const upload = multer({ storage: storage })
-
-
-
-app.post("/api/lists", upload.single("image"),async (req, res) => {
+app.post("/api/lists" ,async (req, res) => {
     try {
-        console.log(req.body);
-        console.log(req.file);
         const newLists = new Lists({
             title: req.body.title,
             Date: req.body.Date,
@@ -56,10 +53,27 @@ app.post("/api/lists", upload.single("image"),async (req, res) => {
             PostText: req.body.PostText,
             images: req.body.images,
         });
-
-        await Lists.create(newLists);
-        
+        await Lists.create(newLists); 
         res.json("Submitted: ");
+
+    } catch(error){
+        alert("Error Creating: ", error);
+        res.status(500).json({error: "Error Fetching Books."});
+    };
+});
+app.put("/api/lists" ,async (req, res) => {
+    const ListId = req.body.ListId;
+    try {
+        const updatedLists = new Lists({
+            title: req.body.title,
+            Date: req.body.Date,
+            HreF: req.body.HreF,
+            PostText: req.body.PostText,
+            images: req.body.images,
+        });
+        await Lists.findByIdAndUpdate(ListId, updatedLists); 
+        res.json("Submitted: ");
+
     } catch(error){
         alert("Error Creating: ", error);
         res.status(500).json({error: "Error Fetching Books."});
@@ -78,9 +92,9 @@ app.post("/api/lists", upload.single("image"),async (req, res) => {
 //     }
 // });
 
+//////////////////////////////////////////////////////////////////////
 
 
-app.use('/uploads', express.static('uploads'));
 app.get("/",(req,res) => {
     res.send("port running")
 });

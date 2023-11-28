@@ -23,7 +23,7 @@ function background() {
               className="text-5xl font-bold font-bebos tracking-wide "
               gradient={{ from: "#ff7300", to: "#d6bc33" }}
               animate
-              animateDuration={1200}
+              animateDuration={800}
             >
               SUPREME STUDENT GOVERNMENT
             </FancyText>

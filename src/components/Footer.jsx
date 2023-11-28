@@ -29,7 +29,7 @@ import { TbHeartHandshake } from "react-icons/tb";
 import { FaFacebookSquare, FaGoogle } from "react-icons/fa";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import bgFooter from "../assets/foot.jpg";
 import emailjs from "@emailjs/browser";
 
 function Footer() {
@@ -92,6 +92,9 @@ function Footer() {
       className=" font-bebos"
       bg={useColorModeValue("gray.50", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
+      bgImage={bgFooter}
+      bgSize={"cover"}
+      bgRepeat={"no-repeat"}
     >
       <Container
         as={Stack}
@@ -116,17 +119,22 @@ function Footer() {
           <Text fontWeight={"bold"}>Want to get involved?</Text>
           <Text>Partake student council's activities.</Text>
           <Stack direction={"row"} spacing={3} pt={3} px={3}>
-            <Button px={28} onClick={firstModal.onOpen}>
+            <Button bg={"white"} px={28} onClick={firstModal.onOpen}>
               <TbHeartHandshake />
               <Text px={2}>Let me in</Text>
             </Button>
 
             <a href="https://www.facebook.com/SSGDANAO" target="_blank">
-              <Button label={"Facebook"} href={"#"}>
+              <Button bg={"white"} label={"Facebook"} href={"#"}>
                 <FaFacebookSquare />
               </Button>
             </a>
-            <Button label={"Gmail"} href={"#"} onClick={secondModal.onOpen}>
+            <Button
+              bg={"white"}
+              label={"Gmail"}
+              href={"#"}
+              onClick={secondModal.onOpen}
+            >
               <BiLogoGmail />
             </Button>
           </Stack>
