@@ -26,20 +26,6 @@ function PostCreate({ isAuth }) {
   const [isLoading, setIsLoading] = useState(true);
   const apiURL = "http://localhost:8001/api/lists";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(apiURL);
-        setLists(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log("Error to fetch", error);
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [postText, setPostText] = useState("");
@@ -55,6 +41,20 @@ function PostCreate({ isAuth }) {
   const postsCollectionRef = collection(db, "Posts");
   let navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiURL);
+        setLists(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error to fetch", error);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   const createPost = async (event) => {
     event.preventDefault();
     try {
@@ -69,7 +69,7 @@ function PostCreate({ isAuth }) {
         "http://localhost:8001/api/lists",
         formDataSend,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "application/json" },
         }
       );
       setLists([...lists, response.data]);
@@ -84,6 +84,7 @@ function PostCreate({ isAuth }) {
       navigate("/");
     } catch (e) {
       console.error("Error creating: ", e);
+      console.log("Error creating: ", e);
     }
   };
 

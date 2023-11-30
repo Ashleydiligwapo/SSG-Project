@@ -15,10 +15,11 @@ import {
   Button,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import bg from "../assets/bcimage.jpg";
 import { FaCaretDown } from "react-icons/fa";
 import { IoCaretUpSharp, IoCaretDownOutline } from "react-icons/io5";
-
+import { useAuthState } from "react-firebase-hooks/auth";
 import {
   Modal,
   ModalOverlay,
@@ -30,18 +31,28 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-function Home({ isAuth }) {
+import { Navigate, useNavigate } from "react-router-dom";
+function Home() {
+  const navigate = useNavigate();
   const [lists, setLists] = useState([]); //MERN data items
   const [isLoading, setIsLoading] = useState(true);
   const [updatedLists, setUpdatedLists] = useState([]);
   const apiURL = "http://localhost:8001/api/lists";
+  const { id } = useParams();
   const updateModal = useDisclosure();
+  const [isAuth, setIsAuth] = useState(false);
+  const [user] = useAuthState(auth);
+  useEffect(() => {
+    if (user) {
+      setIsAuth(user.email === "ashley.rodriguez@ctu.edu.ph");
+    }
+  }, [user]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(apiURL);
         setLists(response.data);
-        setUpdatedLists(response.data);
+
         setIsLoading(false);
         console.log(lists);
       } catch (error) {
@@ -52,6 +63,40 @@ function Home({ isAuth }) {
     fetchData();
   }, []);
 
+  const RemoveThis = async (id) => {
+    window.location.reload();
+    axios
+      .delete(`http://localhost:8001/api/lists/${id}`)
+      .then((result) => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log("Error delete: ", err);
+      });
+  };
+
+  ///   to update in input forms
+  // const handleUpdate = async (id, updatedLists) => {
+  //   try {
+  //     await fetch(`http://localhost:8001/api/lists/${id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(updatedLists),
+  //     });
+  //     fetchData();
+  //   } catch (error) {
+  //     console.log("Error updating: ", error);
+  //   }
+  // };
+
+  // const handleChange = (index, field, value) => {
+  //   const updateItem = [...lists];
+  //   updateItem[index][field] = value;
+  //   setLists(updateItem);
+  // };
+
   return (
     <>
       <main className="bg-cover bg-gradient-to-br from-[#224866] via-[#073255] to-[#051431]">
@@ -60,25 +105,7 @@ function Home({ isAuth }) {
         <h1 className="text-center py-4 text-4xl text-white font-quicksand">
           EVENTS
         </h1>
-        <Modal
-          blockScrollOnMount={false}
-          isOpen={updateModal.isOpen}
-          onClose={updateModal.onClose}
-          isCentered
-        >
-          {" "}
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader className="text-center">
-              Sign in to Google.
-            </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody pb={10} className="text-center">
-              <Box></Box>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-        <Button onClick={updateModal.onOpen}></Button>
+
         {isLoading ? (
           <center class="pt-5 py-6">
             <Stack width="80%">
@@ -113,7 +140,7 @@ function Home({ isAuth }) {
           <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-5xl">
             <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
               {lists
-                .map((post) => {
+                .map((post, index) => {
                   return (
                     <ul>
                       <figure
@@ -145,6 +172,17 @@ function Home({ isAuth }) {
                             >
                               {post.PostText}
                             </ShowMoreText>
+
+                            {!isAuth ? (
+                              <></>
+                            ) : (
+                              <Button
+                                onClick={() => RemoveThis(post._id)}
+                                className="delete float-right"
+                              >
+                                Delete form
+                              </Button>
+                            )}
                           </div>
                         </li>
                       </figure>

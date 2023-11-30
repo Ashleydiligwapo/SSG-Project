@@ -2,11 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const connectDB = require("./connectDB.cjs");
 const Lists = require("./Lists.cjs");
-const multer = require('multer');
+
 const { default: mongoose } = require("mongoose");
-const dotenv = require("dotenv").config();
 const bodyParser = require('body-parser');
-const path = require('path');
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -17,21 +15,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 
-const officersLists = mongoose.Schema({
-        name: String,
-        facebook: String,
-        image: String,
-        isActOfficer: Boolean,
-        isPresident: Boolean,
-        isVP: Boolean,
-        isGeneralSec: Boolean,
-        isTreasurer: Boolean,
-        isAdviser: Boolean,
-        isElected: Boolean,
-        isGovernors: Boolean,
-        isAppointed: Boolean
-});
-const Officers = mongoose.model('Officers',officersLists);
+// const officersLists = mongoose.Schema({
+//         name: String,
+//         facebook: String,
+//         image: String,
+//         isActOfficer: Boolean,
+//         isPresident: Boolean,
+//         isVP: Boolean,
+//         isGeneralSec: Boolean,
+//         isTreasurer: Boolean,
+//         isAdviser: Boolean,
+//         isElected: Boolean,
+//         isGovernors: Boolean,
+//         isAppointed: Boolean
+// });
+// const Officers = mongoose.model('Officers',officersLists);
 
 
 ///////                  Lists data         ///////////
@@ -46,6 +44,8 @@ app.get("/api/lists", async (req, res) => {
 });
 app.post("/api/lists" ,async (req, res) => {
     try {
+  console.log(req.body);
+        console.log(req.file);
         const newLists = new Lists({
             title: req.body.title,
             Date: req.body.Date,
@@ -53,31 +53,55 @@ app.post("/api/lists" ,async (req, res) => {
             PostText: req.body.PostText,
             images: req.body.images,
         });
+      
         await Lists.create(newLists); 
         res.json("Submitted: ");
 
     } catch(error){
-        alert("Error Creating: ", error);
+      
         res.status(500).json({error: "Error Fetching Books."});
     };
 });
-app.put("/api/lists" ,async (req, res) => {
-    const ListId = req.body.ListId;
-    try {
-        const updatedLists = new Lists({
-            title: req.body.title,
-            Date: req.body.Date,
-            HreF: req.body.HreF,
-            PostText: req.body.PostText,
-            images: req.body.images,
-        });
-        await Lists.findByIdAndUpdate(ListId, updatedLists); 
-        res.json("Submitted: ");
 
-    } catch(error){
-        alert("Error Creating: ", error);
-        res.status(500).json({error: "Error Fetching Books."});
-    };
+/////////////////        to edit a form in home page  //////////////////////
+// app.put("/api/lists/:id" ,async (req, res) => {
+//    const { id } = req.params; 
+//     try {
+//         const updatedLists = {
+//             title: req.body.title,
+//             Date: req.body.Date,
+//             HreF: req.body.HreF,
+//             PostText: req.body.PostText,
+//             images: req.body.images,
+//         }
+//         await Lists.findByIdAndUpdate(id, updatedLists); 
+//         res.json("Submitted: ");
+
+//     } catch(error){
+//         alert("Error Creating: ", error);
+//         res.status(500).json({error: "Error Fetching Books."});
+//     };
+// });
+
+app.delete('/api/lists/:id', (req, res) => {
+    Lists.findByIdAndRemove(req.params.id, req.body)
+    .then((result) => {
+        res.json("List deleted.");
+    }).catch((err) => {
+        res.status(404).json({err});
+    });
+
+    // const { id } = req.params;
+    // try {
+    //     const deleteList = await Lists.findByIdAndRemove(id);
+    //     res.json("Delete this form? " + req.body.ListsId);
+    //     if(!deleteList){
+    //         res.json("List not found");
+    //     };
+    //     res.status(200).json(deleteList);
+    // } catch (error) {
+    //     res.json("Error deleting file.");
+    // }
 });
 
 // app.put("/api/lists/:id", async(req, res) =>{
