@@ -47,6 +47,7 @@ function Home() {
       setIsAuth(user.email === "ashley.rodriguez@ctu.edu.ph");
     }
   }, [user]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {

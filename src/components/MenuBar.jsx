@@ -37,7 +37,9 @@ function MenuBar() {
           <MenuItem>
             <Link to="/Board">SSG - Officers</Link>
           </MenuItem>
-          <MenuItem>University - Merch</MenuItem>
+          <MenuItem>
+            <Link to="/Merch">University - Merch</Link>
+          </MenuItem>
           <MenuItem>
             <Link to="/Lanyads">Lanyards</Link>
           </MenuItem>

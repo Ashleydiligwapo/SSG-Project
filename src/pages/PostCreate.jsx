@@ -6,14 +6,14 @@ import { db, auth, storage } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import login from "./login";
 import axios from "axios";
+import Select from "react-select";
 import {
   ref,
   uploadString,
   getDownloadURL,
   uploadBytes,
 } from "firebase/storage";
-import FreedomCode from "./FreedomCode";
-
+import { MultiSelect } from "primereact/multiselect";
 function PostCreate({ isAuth }) {
   const [lists, setLists] = useState([]);
   const [datainForm, setDatainForm] = useState({
@@ -23,22 +23,34 @@ function PostCreate({ isAuth }) {
     PostText: "",
     images: "",
   });
+
+  const [merchForm, setMerchForm] = useState({
+    price: "",
+    name: "",
+    type: "",
+    stock: "",
+    image: "",
+    material: "",
+    variation: "",
+    plusSize: "",
+  });
+
+  const option = [
+    { name: "New York", code: "NY" },
+    { name: "Rome", code: "RM" },
+    { name: "London", code: "LDN" },
+    { name: "Istanbul", code: "IST" },
+    { name: "Paris", code: "PRS" },
+  ];
+
   const [isLoading, setIsLoading] = useState(true);
   const apiURL = "http://localhost:8001/api/lists";
-
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [postText, setPostText] = useState("");
-  const [imageUpload, setImageUpload] = useState(null);
-
   const [FcTitle, setFcTitle] = useState("");
   const [FcDate, setFcDate] = useState("");
   const [FcPostText, setFcPostText] = useState("");
   const [FcImageUpload, setFcImageUpload] = useState(null);
   const [FcHref, setFcHref] = useState("");
-
   const freedomCodeCollectionRef = collection(db, "FreedomCode");
-  const postsCollectionRef = collection(db, "Posts");
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -54,6 +66,28 @@ function PostCreate({ isAuth }) {
     };
     fetchData();
   }, []);
+
+  const merchPost = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8001/api/merches", merchForm)
+      .then((result) => {
+        setMerchForm({
+          price: "",
+          name: "",
+          type: "",
+          stock: "",
+          image: "",
+          material: "",
+          variation: "",
+          plusSize: "",
+        });
+        navigate("/Merch");
+      })
+      .catch((err) => {
+        console.log("Error creating: ", err);
+      });
+  };
 
   const createPost = async (event) => {
     event.preventDefault();
@@ -262,6 +296,135 @@ function PostCreate({ isAuth }) {
           >
             Submit
           </button>
+        </figure>
+      </article>
+      <article className="py-10 mx-auto ssm:max-w-md sm:max-w-1xl md:max-w-2xl lg:max-w-5xl">
+        <figure className="rounded-md bg-gradient-to-br from-[#f0e550] via-[#e0be42] to-[#d8c944] max-h-full pt-5 pb-5 px-10 my-5 mx-auto">
+          <form onSubmit={merchPost}>
+            <input
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              type="number"
+              placeholder="Input Price: "
+              name="price"
+              value={merchForm.price}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              type="text"
+              placeholder="Input Name: "
+              name="name"
+              value={merchForm.name}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              type="text"
+              placeholder="Input Type: "
+              name="type"
+              value={merchForm.type}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              type="number"
+              placeholder="Input Stock available: "
+              name="stock"
+              value={merchForm.stock}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              type="text"
+              placeholder="Image Link: "
+              name="image"
+              value={merchForm.image}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              type="text"
+              placeholder="Input Materials: "
+              name="material"
+              value={merchForm.material}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              type="text"
+              placeholder="Input Variation: "
+              name="variation"
+              value={merchForm.variation}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <select
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              value={merchForm.plusSize}
+              name="plusSize"
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            >
+              <option value="">None</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+            <MultiSelect
+              className="bg-white my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              placeholder="Pluz size thirt? Yes or no: "
+              options={option}
+              value={merchForm.plusSize}
+              name="plusSize"
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+              optionLabel="name"
+              display="chip"
+              maxSelectedLabels={6}
+            />
+            <button type="submit">DONE</button>
+          </form>
         </figure>
       </article>
     </main>

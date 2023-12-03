@@ -16,6 +16,7 @@ import FreedomCode from "./pages/FreedomCode";
 import CreateBoard from "./pages/CreateBoard";
 import MenuBar from "./components/MenuBar";
 import Lanyards from "./pages/Lanyards";
+import Merch from "./pages/Merch";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/CreateBoard" element={<CreateBoard isAuth={isAuth} />} />
         <Route path="/MenuBar" element={<MenuBar isAuth={isAuth} />} />
         <Route path="/Lanyards" element={<Lanyards />} />
+        <Route path="/Merch" element={<Merch isAuth={isAuth} />} />
       </Routes>
       <div>
         <Footer />

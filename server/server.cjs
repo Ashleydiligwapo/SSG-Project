@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const connectDB = require("./connectDB.cjs");
 const Lists = require("./Lists.cjs");
-
+const Merch = require("./Merch.cjs");
 const { default: mongoose } = require("mongoose");
 const bodyParser = require('body-parser');
 const cors = require("cors");
@@ -31,6 +31,40 @@ app.use(bodyParser.json());
 // });
 // const Officers = mongoose.model('Officers',officersLists);
 
+////////////   MERCH API /////////////////
+app.get("/api/merches", (req, res) => {
+    Merch.find()
+    .then((result) => {
+        res.json(result)
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.post("/api/merches", (req, res) => {
+    Merch.create(req.body)
+    .then((result) => {
+        res.json("Submitted:")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.put("/api/merches/:id", (req, res) => {
+    Merch.findByIdAndUpdate(req.params.id,  req.body)
+    .then((result) => {
+        res.json("Updated")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.delete("/api/merches/:id", (req,res) => {
+    Merch.findByIdAndRemove(req.params.id, req.body)
+    .then((result) => {
+        res.json("Removed")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+////////////   MERCH API /////////////////
 
 ///////                  Lists data         ///////////
 //this is to fetch the data from mongoo db

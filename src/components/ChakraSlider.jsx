@@ -36,7 +36,8 @@ function ChakraSlider() {
     {
       title: "Services and Leaderships",
       text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image: "https://f005.backblazeb2.com/file/MERN-Project/OFFICERS/ssg2.jpg",
+      image:
+        "https://f005.backblazeb2.com/file/MERN-Project/395346655_1383285495632752_8937385563233366527_n.jpg",
     },
     {
       title: "Services and Leaderships",
