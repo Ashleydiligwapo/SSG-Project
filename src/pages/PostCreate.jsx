@@ -30,18 +30,12 @@ function PostCreate({ isAuth }) {
     type: "",
     stock: "",
     image: "",
-    material: "",
-    variation: "",
-    plusSize: "",
+    material: [],
+    variation: [],
+    plusSize: [],
+    color: [],
+    Tprint: [],
   });
-
-  const option = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
-  ];
 
   const [isLoading, setIsLoading] = useState(true);
   const apiURL = "http://localhost:8001/api/lists";
@@ -78,9 +72,11 @@ function PostCreate({ isAuth }) {
           type: "",
           stock: "",
           image: "",
-          material: "",
-          variation: "",
-          plusSize: "",
+          material: [],
+          variation: [],
+          plusSize: [],
+          color: [],
+          Tprint: [],
         });
         navigate("/Merch");
       })
@@ -155,7 +151,77 @@ function PostCreate({ isAuth }) {
       navigate("/login");
     }
   }, []);
+  const handleMaterialChange = (selectOption) => {
+    const materials = selectOption.map((option) => option.value);
+    setMerchForm({ ...merchForm, material: materials });
+  };
+  const handleSizeChange = (selectOption) => {
+    const plusSizes = selectOption.map((option) => option.value);
+    setMerchForm({ ...merchForm, plusSize: plusSizes });
+  };
+  const handleVarChange = (selectOption) => {
+    const vars = selectOption.map((option) => option.value);
+    setMerchForm({ ...merchForm, variation: vars });
+  };
+  const handleColorChange = (selectOption) => {
+    const colors = selectOption.map((option) => option.value);
+    setMerchForm({ ...merchForm, color: colors });
+  };
+  const handlePrintChange = (selectOption) => {
+    const tprints = selectOption.map((option) => option.value);
+    setMerchForm({ ...merchForm, Tprint: tprints });
+  };
+  const materialOption = [
+    { value: "Cotton", label: "Cotton" },
+    { value: "Silk", label: "Silk" },
+    { value: "Jersey", label: "Jersey" },
+    { value: "Line In", label: "Line In" },
+    { value: "Polyester", label: "Polyester" },
+    // Add more options as needed
+  ];
+  const variationOption = [
+    { value: " HENLEY ", label: "HENLEY" },
+    { value: " Crewneck ", label: "Crewneck" },
+    { value: " V-Neck ", label: "V-Neck" },
+    { value: " Polo ", label: "Polo" },
+    { value: " Jersey/Athletic ", label: "Jersey/Athletic" },
+    // Add more options as needed
+  ];
+  const sizesOption = [
+    { value: " XS ,", label: "XS" },
+    { value: " S ,", label: "S" },
+    { value: " M ,", label: "M" },
+    { value: " L ,", label: "L" },
+    { value: " XL ,", label: "XL" },
+    { value: " XXL ,", label: "XXL" },
+    { value: " 3XL ,", label: "3XL" },
+    { value: " 4XL ,", label: "4XL" },
+    { value: " 5XL ,", label: "5XL" },
+    // Add more options as needed
+  ];
 
+  const colorsOption = [
+    { value: "Red 🟥 ", label: "Red 🟥" },
+    { value: "Blue 🟦 ", label: "Blue 🟦" },
+    { value: "Green 🟩 ", label: "Green 🟩" },
+    { value: "Yellow 🟨 ", label: "Yellow 🟨" },
+    { value: "White ⬜ ", label: "White ⬜" },
+    { value: "Black ⬛ ", label: "Black ⬛" },
+    { value: "Purple 🟪 ", label: "Purple 🟪" },
+    { value: "Orange 🟧 ", label: "Orange 🟧" },
+    { value: "Brown 🟫 ", label: "Brown 🟫" },
+    { value: "Pink 👛 ", label: "Pink 👛" },
+    { value: "Teal 🧼 ", label: "Teal 🧼" },
+  ];
+  const printingOption = [
+    { value: " Screen Print /", label: "Screen Print" },
+    { value: " Dye Sublimation /", label: "Dye Sublimation" },
+    { value: " Air Brushing /", label: "Air Brushing" },
+    { value: " Full Sublimation /", label: "Full Sublimation" },
+    { value: " Heat Press Printing /", label: "Heat Press Printing" },
+    { value: " Text Tile Printing /", label: "Text Tile Printing" },
+    // Add more options as needed
+  ];
   return (
     <main className="font-poppins max-w-full max-h-full bg-gradient-to-br from-[#224866] via-[#073255] to-[#051431]">
       <article className="py-10 mx-auto ssm:max-w-md sm:max-w-1xl md:max-w-2xl lg:max-w-5xl">
@@ -298,11 +364,12 @@ function PostCreate({ isAuth }) {
           </button>
         </figure>
       </article>
-      <article className="py-10 mx-auto ssm:max-w-md sm:max-w-1xl md:max-w-2xl lg:max-w-5xl">
+      <article className=" py-10 mx-auto ssm:max-w-md sm:max-w-1xl md:max-w-2xl lg:max-w-5xl">
         <figure className="rounded-md bg-gradient-to-br from-[#f0e550] via-[#e0be42] to-[#d8c944] max-h-full pt-5 pb-5 px-10 my-5 mx-auto">
           <form onSubmit={merchPost}>
+            <Text>Item Price.</Text>
             <input
-              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-21"
               type="number"
               placeholder="Input Price: "
               name="price"
@@ -314,6 +381,40 @@ function PostCreate({ isAuth }) {
                 });
               }}
             />
+            <Text>Item stock available.</Text>
+            <input
+              className="my-2 px-5 p-2 pr-5  rounded-sm w-21"
+              type="number"
+              placeholder="Input Stock available: "
+              name="stock"
+              value={merchForm.stock}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <Text>Item sex type.</Text>
+            <select
+              className="my-2 px-5 p-2 pr-5 rounded-sm w-21"
+              type="text"
+              placeholder="Input Type: "
+              name="type"
+              value={merchForm.type}
+              onChange={(event) => {
+                setMerchForm({
+                  ...merchForm,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            >
+              <option value="">None</option>
+              <option value="Unisex">Unisex</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <Text>Item name.</Text>
             <input
               className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
               type="text"
@@ -327,32 +428,7 @@ function PostCreate({ isAuth }) {
                 });
               }}
             />
-            <input
-              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
-              type="text"
-              placeholder="Input Type: "
-              name="type"
-              value={merchForm.type}
-              onChange={(event) => {
-                setMerchForm({
-                  ...merchForm,
-                  [event.target.name]: event.target.value,
-                });
-              }}
-            />
-            <input
-              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
-              type="number"
-              placeholder="Input Stock available: "
-              name="stock"
-              value={merchForm.stock}
-              onChange={(event) => {
-                setMerchForm({
-                  ...merchForm,
-                  [event.target.name]: event.target.value,
-                });
-              }}
-            />
+            <Text>Item image.</Text>
             <input
               className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
               type="text"
@@ -366,64 +442,73 @@ function PostCreate({ isAuth }) {
                 });
               }}
             />
-            <input
-              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
+            <Text>Item material used.</Text>
+            <Select
+              isMulti={true}
+              options={materialOption}
+              className="bg-white text-slate-800 my-2 px-5 p-2 pr-5 rounded-sm w-full"
               type="text"
               placeholder="Input Materials: "
               name="material"
-              value={merchForm.material}
-              onChange={(event) => {
-                setMerchForm({
-                  ...merchForm,
-                  [event.target.name]: event.target.value,
-                });
-              }}
+              value={materialOption.filter((option) =>
+                merchForm.material.includes(option.value)
+              )}
+              onChange={handleMaterialChange}
             />
-            <input
-              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
-              type="text"
+            <Text>Item variation.</Text>
+            <Select
+              isMulti={true}
+              options={variationOption}
+              className="bg-white text-slate-800 my-2 px-5 p-2 pr-5 rounded-sm w-full"
               placeholder="Input Variation: "
               name="variation"
-              value={merchForm.variation}
-              onChange={(event) => {
-                setMerchForm({
-                  ...merchForm,
-                  [event.target.name]: event.target.value,
-                });
-              }}
+              value={variationOption.filter((option) =>
+                merchForm.variation.includes(option.value)
+              )}
+              onChange={handleVarChange}
             />
-            <select
-              className="my-2 px-5 p-2 pr-5 rounded-sm w-full"
-              value={merchForm.plusSize}
+            <Text>Item sizes.</Text>
+            <Select
+              isMulti={true}
+              placeholder="Select item sizes"
+              className="bg-white text-slate-800 my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              options={sizesOption}
+              value={sizesOption.filter((option) =>
+                merchForm.plusSize.includes(option.value)
+              )}
               name="plusSize"
-              onChange={(event) => {
-                setMerchForm({
-                  ...merchForm,
-                  [event.target.name]: event.target.value,
-                });
-              }}
+              onChange={handleSizeChange}
+            />
+            <Text>Item Colors.</Text>
+            <Select
+              isMulti={true}
+              className="bg-white text-slate-800 my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              placeholder="Choose colors: "
+              name="color"
+              options={colorsOption}
+              value={colorsOption.filter((option) =>
+                merchForm.color.includes(option.value)
+              )}
+              onChange={handleColorChange}
+            />
+            <Text>Item printing type.</Text>
+            <Select
+              isMulti={true}
+              className="bg-white  text-slate-800 my-2 px-5 p-2 pr-5 rounded-sm w-full"
+              placeholder="Printing type:"
+              name="Tprint"
+              options={printingOption}
+              value={printingOption.filter((option) =>
+                merchForm.Tprint.includes(option.value)
+              )}
+              onChange={handlePrintChange}
+            />
+            <button
+              type="submit"
+              className="my-1 p-2 rounded-md bg-[#3fcf76] cursor-pointer hover:bg-[#4cdba4] transition-colors text-[#184f57]"
             >
-              <option value="">None</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-            <MultiSelect
-              className="bg-white my-2 px-5 p-2 pr-5 rounded-sm w-full"
-              placeholder="Pluz size thirt? Yes or no: "
-              options={option}
-              value={merchForm.plusSize}
-              name="plusSize"
-              onChange={(event) => {
-                setMerchForm({
-                  ...merchForm,
-                  [event.target.name]: event.target.value,
-                });
-              }}
-              optionLabel="name"
-              display="chip"
-              maxSelectedLabels={6}
-            />
-            <button type="submit">DONE</button>
+              DONE
+            </button>
           </form>
         </figure>
       </article>

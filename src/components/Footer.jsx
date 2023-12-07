@@ -44,6 +44,7 @@ function Footer() {
   let navigate = useNavigate();
 
   const signInWithGoogle = () => {
+    window.location.reload();
     signInWithPopup(auth, provider).then((result) => {
       localStorage.setItem("isAuth", true);
       setIsAuth(true);
@@ -57,7 +58,7 @@ function Footer() {
     emailjs
       .sendForm(
         "service_17wxkco",
-        "template_jlxt4ws",
+        "template_gvwroxp",
         form.current,
         "P_fgWrBJrvje7_WyA"
       )

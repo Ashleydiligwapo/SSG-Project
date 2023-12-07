@@ -40,6 +40,14 @@ app.get("/api/merches", (req, res) => {
         res.status(404).json(err);
     });
 });
+app.get("/api/merches/:id", (req, res) => {
+    Merch.findById(req.params.id, req.body)
+    .then((result) => {
+        res.json(result)
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
 app.post("/api/merches", (req, res) => {
     Merch.create(req.body)
     .then((result) => {

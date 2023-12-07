@@ -126,6 +126,7 @@ function CreateBoard({ isAuth }) {
               <p>{items.title}</p>
               <p>{items.Date}</p>
               <p>{items.PostText}</p>
+              <pre>{items.color}</pre>
             </a>
           </li>
         ))}
