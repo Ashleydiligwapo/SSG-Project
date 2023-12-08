@@ -212,6 +212,7 @@ function PostCreate({ isAuth }) {
     { value: "Brown 🟫 ", label: "Brown 🟫" },
     { value: "Pink 👛 ", label: "Pink 👛" },
     { value: "Teal 🧼 ", label: "Teal 🧼" },
+    { value: "Dark Blue 💙 ", label: "Dark Blue 💙" },
   ];
   const printingOption = [
     { value: " Screen Print /", label: "Screen Print" },
@@ -366,6 +367,9 @@ function PostCreate({ isAuth }) {
       </article>
       <article className=" py-10 mx-auto ssm:max-w-md sm:max-w-1xl md:max-w-2xl lg:max-w-5xl">
         <figure className="rounded-md bg-gradient-to-br from-[#f0e550] via-[#e0be42] to-[#d8c944] max-h-full pt-5 pb-5 px-10 my-5 mx-auto">
+          <Text className="text-center text-[#183258] py-2 m-5 font-poppins font-semibold">
+            Add Merch Item
+          </Text>
           <form onSubmit={merchPost}>
             <Text>Item Price.</Text>
             <input

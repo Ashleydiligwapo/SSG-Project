@@ -12,6 +12,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { CiMenuFries } from "react-icons/ci";
 function SideDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -25,11 +26,19 @@ function SideDrawer() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">Web pages</DrawerHeader>
           <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <Link to={"/"}>Home</Link>
+            <p>About ⦮</p>
+            <Link to={"/Board"}>SSG-Officers</Link>
+            <br />
+            <Link to={"/Merch"}>University - Merch</Link>
+            <br />
+            <Link to={"/Lanyards"}>Lanyards</Link>
+            <Link to={""}></Link>
+            <Link to={""}></Link>
+            <Link to={""}></Link>
+            <Link to={""}></Link>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
