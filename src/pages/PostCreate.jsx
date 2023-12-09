@@ -15,6 +15,7 @@ import {
 } from "firebase/storage";
 import { MultiSelect } from "primereact/multiselect";
 function PostCreate({ isAuth }) {
+  const serverURL = import.meta.env.VITE_SERVER_URL;
   const [lists, setLists] = useState([]);
   const [datainForm, setDatainForm] = useState({
     title: "",
@@ -38,7 +39,7 @@ function PostCreate({ isAuth }) {
   });
 
   const [isLoading, setIsLoading] = useState(true);
-  const apiURL = "http://localhost:8001/api/lists";
+  const apiURL = `${serverURL}/api/lists`;
   const [FcTitle, setFcTitle] = useState("");
   const [FcDate, setFcDate] = useState("");
   const [FcPostText, setFcPostText] = useState("");
@@ -64,7 +65,7 @@ function PostCreate({ isAuth }) {
   const merchPost = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8001/api/merches", merchForm)
+      .post(`${serverURL}/api/merches`, merchForm)
       .then((result) => {
         setMerchForm({
           price: "",
@@ -96,7 +97,7 @@ function PostCreate({ isAuth }) {
       formDataSend.append("images", datainForm.images);
 
       const response = await axios.post(
-        "http://localhost:8001/api/lists",
+        `${serverURL}/api/lists`,
         formDataSend,
         {
           headers: { "Content-Type": "application/json" },

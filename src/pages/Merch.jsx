@@ -25,11 +25,11 @@ import { useDisclosure } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 function Merch() {
+  const serverURL = import.meta.env.VITE_SERVER_URL;
   const navigate = useNavigate();
   const [merchLists, setMerchLists] = useState([]);
   const form = useRef();
   const [email, setEmail] = useState("");
-
   const [quantity, setQuantity] = useState(0);
   const [name, setName] = useState("");
   const { id } = useParams();
@@ -48,7 +48,7 @@ function Merch() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8001/api/merches")
+      .get(`${serverURL}/api/merches`)
       .then((result) => {
         setMerchLists(result.data);
       })
@@ -60,7 +60,7 @@ function Merch() {
   const deleteMerch = (id) => {
     window.location.reload();
     axios
-      .delete(`http://localhost:8001/api/merches/${id}`)
+      .delete(`${serverURL}/api/merches/${id}`)
       .then((result) => {
         alert("Success deleting:");
         navigate("/Merch");

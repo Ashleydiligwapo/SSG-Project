@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 function MerchUpdate() {
+  const serverURL = import.meta.env.VITE_SERVER_URL;
   const [merchLists, setMerchLists] = useState([]);
   const [merchForm, setMerchForm] = useState({
     price: "",
@@ -29,7 +30,7 @@ function MerchUpdate() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8001/api/merches/${id}`)
+      .get(`${serverURL}/api/merches/${id}`)
       .then((result) => {
         setMerchForm({
           price: result.data.price,
@@ -55,7 +56,7 @@ function MerchUpdate() {
       stock: merchForm.stock,
     };
     axios
-      .put(`http://localhost:8001/api/merches/${id}`, data)
+      .put(`${serverURL}/api/merches/${id}`, data)
       .then((result) => {
         alert("Item stocks updated:");
         navigate("/Merch");

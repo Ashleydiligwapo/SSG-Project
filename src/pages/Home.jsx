@@ -37,7 +37,8 @@ function Home() {
   const [lists, setLists] = useState([]); //MERN data items
   const [isLoading, setIsLoading] = useState(true);
   const [updatedLists, setUpdatedLists] = useState([]);
-  const apiURL = "http://localhost:8001/api/lists";
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+  const apiURL = `${serverURL}/api/lists`;
   const { id } = useParams();
   const updateModal = useDisclosure();
   const [isAuth, setIsAuth] = useState(false);
@@ -67,7 +68,7 @@ function Home() {
   const RemoveThis = async (id) => {
     window.location.reload();
     axios
-      .delete(`http://localhost:8001/api/lists/${id}`)
+      .delete(`${serverURL}/api/lists/${id}`)
       .then((result) => {
         navigate("/");
       })
