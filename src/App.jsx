@@ -18,6 +18,8 @@ import MenuBar from "./components/MenuBar";
 import Lanyards from "./pages/Lanyards";
 import Merch from "./pages/Merch";
 import MerchUpdate from "./pages/MerchUpdate";
+import Navigation from "./components/Navigation";
+import SideDrawer from "./components/SideDrawer";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -39,6 +41,14 @@ function App() {
         <Route
           path="/MerchUpdate/:id"
           element={<MerchUpdate isAuth={isAuth} />}
+        ></Route>
+        <Route
+          path="/Navigation"
+          element={<Navigation isAuth={isAuth} />}
+        ></Route>
+        <Route
+          path="/SideDrawer"
+          element={<SideDrawer isAuth={isAuth} />}
         ></Route>
       </Routes>
       <div>

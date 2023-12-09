@@ -35,10 +35,10 @@ function SideDrawer() {
             <Link to={"/Merch"}>University - Merch</Link>
             <br />
             <Link to={"/Lanyards"}>Lanyards</Link>
+            {/* <Link to={""}></Link>
             <Link to={""}></Link>
             <Link to={""}></Link>
-            <Link to={""}></Link>
-            <Link to={""}></Link>
+            <Link to={""}></Link> */}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
