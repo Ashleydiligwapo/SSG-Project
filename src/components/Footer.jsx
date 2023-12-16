@@ -107,22 +107,28 @@ function Footer() {
         align={{ base: "center", md: "center" }}
       >
         <div className="text-center font-quicksand ">
-          <Text fontWeight={"bold"}>Connect with us.</Text>
+          <Text fontWeight={"bold"} className="text-black">
+            Connect with us.
+          </Text>
           <Text w={80}>
             For more information, Follow Supreme Student Government and stay up
             to date for our campus activities and events work.
           </Text>
           <br />
-          <Text>0909 948 3719</Text>
+          <Text className="text-black">0909 948 3719</Text>
         </div>
 
         <div className="text-center font-quicksand ">
-          <Text fontWeight={"bold"}>Want to get involved?</Text>
+          <Text fontWeight={"bold"} className="text-black">
+            Want to get involved?
+          </Text>
           <Text>Partake student council's activities.</Text>
           <Stack direction={"row"} spacing={3} pt={3} px={3}>
             <Button bg={"white"} px={28} onClick={firstModal.onOpen}>
               <TbHeartHandshake />
-              <Text px={2}>Let me in</Text>
+              <Text px={1} className="max-w-full md:w-full ssm:w-2">
+                Let me in
+              </Text>
             </Button>
 
             <a href="https://www.facebook.com/SSGDANAO" target="_blank">
@@ -215,8 +221,10 @@ function Footer() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        <Text>
-          © 2022 - 2023 SSG <b>DANAO CTU - SABANG</b>
+        <Text className="font-quicksand">
+          <b>DANAO CTU - SABANG</b>
+          <br />
+          COT OFFICE SECOND FLOOR <br /> © 2022 - 2023 SSG
         </Text>
       </Container>
     </Box>

@@ -85,15 +85,9 @@ function MenuBar() {
           More
         </MenuButton>
         <MenuList>
-          {!isAuth ? (
-            <></>
-          ) : (
-            <>
-              <MenuItem>
-                <Link to="/FreedomCode">Freedom Code</Link>
-              </MenuItem>
-            </>
-          )}
+          <MenuItem>
+            <Link to="/FreedomCode">Freedom Code</Link>
+          </MenuItem>
         </MenuList>
       </Menu>
     </div>

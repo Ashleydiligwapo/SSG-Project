@@ -140,7 +140,7 @@ function Home() {
           </center>
         ) : (
           <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-5xl">
-            <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
+            <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
               {lists
                 .map((post, index) => {
                   return (
@@ -153,7 +153,7 @@ function Home() {
                         <li>
                           <a href={post.HreF} target="_blank">
                             <img
-                              className="max-h-full w-full object-cover rounded-xl md:h-full "
+                              className="max-h-64 w-full object-cover rounded-xl md:h-full "
                               src={post.images}
                               alt={`Image ${post.id}`}
                             />
@@ -167,8 +167,8 @@ function Home() {
                             </p>
 
                             <ShowMoreText
-                              lines={7}
-                              className="content-css "
+                              lines={5}
+                              className="content-css md:px-1 md:py-2 ssm:px-0 ssm:py-0"
                               less={<IoCaretUpSharp />}
                               more={<IoCaretDownOutline />}
                             >

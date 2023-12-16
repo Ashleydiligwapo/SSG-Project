@@ -5,6 +5,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import {
   Button,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Box,
+  Stack,
   Modal,
   Input,
   ModalOverlay,
@@ -21,9 +26,11 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { BsCart3 } from "react-icons/bs";
+
 import { useDisclosure } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
+
 function Merch() {
   const serverURL = import.meta.env.VITE_SERVER_URL;
   const navigate = useNavigate();
@@ -40,6 +47,7 @@ function Merch() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (user) {
       setIsAuth(user.email === "ashley.rodriguez@ctu.edu.ph");
@@ -50,6 +58,7 @@ function Merch() {
     axios
       .get(`${serverURL}/api/merches`)
       .then((result) => {
+        setIsLoading(false);
         setMerchLists(result.data);
       })
       .catch((err) => {
@@ -132,127 +141,162 @@ function Merch() {
   return (
     <>
       <main className="bg-cover bg-gradient-to-br from-[#233d52] via-[#173955] to-[#051431]">
-        <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-7xl">
-          <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
-            {merchLists
-              .map((post) => {
-                return (
-                  <ul>
-                    <figure
-                      // data-aos="fade-up"
-                      className="max-h-full max-w-full  rounded-xl m-2 bg-gradient-to-r from-[#d8ce92] via-[#e0ddc3] to-[#eedb9c] font-quicksand my-10 rounded-x ssm:pb-5 ssm:grid ssm:text-center sm:max-h-full sm:pb-5 sm: md:pb-1 md:flex md:text-justify md:h-96 lg:p-0  "
-                      key={post._id}
-                    >
-                      <div className="relative ">
-                        <img
-                          className="max-h-96 w-96 object-cover  rounded-xl ssm:w-full ssm:h-full sm:h-full  lg:h-full md:h-full"
-                          src={post.image}
-                          alt={`Image ${post.id}`}
-                        />
-                        <div
-                          className="absolute px-5 py-5 bottom-0 left-0 right-0 bg-gradient-to-t from-[#32a6c99a] via-[#5cc8db28]
+        {isLoading ? (
+          <center class="pt-5 py-6">
+            <Stack width="80%">
+              <Skeleton
+                startColor="blue.400"
+                endColor="orange.400"
+                height="40px"
+              />
+              <Skeleton
+                startColor="blue.500"
+                endColor="orange.500"
+                height="40px"
+              />
+              <Skeleton
+                startColor="blue.500"
+                endColor="orange.500"
+                height="40px"
+              />
+              <Skeleton
+                startColor="blue.500"
+                endColor="orange.500"
+                height="40px"
+              />
+              <Skeleton
+                startColor="blue.500"
+                endColor="orange.500"
+                height="40px"
+              />
+            </Stack>
+          </center>
+        ) : (
+          <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-7xl">
+            <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+              {merchLists
+                .map((post) => {
+                  return (
+                    <ul>
+                      <figure
+                        // data-aos="fade-up"
+                        className="max-h-full max-w-full  rounded-xl m-2 bg-gradient-to-r from-[#d8ce92] via-[#e0ddc3] to-[#eedb9c] font-quicksand my-10 rounded-x ssm:pb-5 ssm:grid ssm:text-center sm:max-h-full sm:pb-5 sm: md:pb-1 md:flex md:text-justify md:h-96 lg:p-0  "
+                        key={post._id}
+                      >
+                        <div className="relative ">
+                          <img
+                            className="max-h-96 w-96 object-cover  rounded-xl ssm:w-full ssm:h-full sm:h-full  lg:h-full md:h-full"
+                            src={post.image}
+                            alt={`Image ${post.id}`}
+                          />
+                          <div
+                            className="absolute px-5 py-5 bottom-0 left-0 right-0 bg-gradient-to-t from-[#32a6c99a] via-[#5cc8db28]
                          to-[#147c9600] rounded-b-md "
-                        >
-                          <h3 class="z-10 overflow-hidden text-left mb-1 text-3xl font-bold font-poppins text-emerald-700">
-                            {post.name}
-                          </h3>
-                          <div class="z-10 bg-slate-900  gap-y-1 overflow-hidden text-1xl leading-3 p-3 w-24 rounded-2xl font-extrabold text-teal-500">
-                            ₱ {post.price}.00
+                          >
+                            <h3 class="z-10 overflow-hidden text-left mb-1 text-3xl font-bold font-poppins text-emerald-700">
+                              {post.name}
+                            </h3>
+                            <div class="z-10 bg-slate-900  gap-y-1 overflow-hidden text-1xl leading-3 p-3 w-24 rounded-2xl font-extrabold text-teal-500">
+                              ₱ {post.price}.00
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className="grid">
-                        <p className="px-2  py-1 text-teal-950 font-bold font-poppins">
-                          Product Specification:
-                          {!isAuth ? (
-                            <></>
-                          ) : (
-                            <>
-                              <button
-                                className="grid text-red-600"
-                                onClick={() => {
-                                  deleteMerch(post._id);
-                                }}
-                              >
-                                Delete
-                              </button>
-                            </>
-                          )}
-                        </p>
-
-                        <p className="px-1 py-1 text-teal-950 font-poppins flex">
-                          <p className="px-1 text-teal-900 font-bold">
-                            Colors:
-                          </p>
-                          {post.color}
-                        </p>
-
-                        <p className="px-1 py-1 text-teal-950 font-poppins flex">
-                          <p className="px-1 pr-2 font-bold">Sizes:</p>
-                          {post.plusSize}
-                        </p>
-
-                        <p className=" text-sm px-2 py-1 text-teal-900 font-bold font-poppins ssm:text-left ssm:flex lg:grid">
-                          <p className="text-teal-950 font-bold">Print type:</p>
-                          {post.Tprint}
-                        </p>
-                        <p className="text-sm px-2 text-teal-900 font-bold font-poppins flex ">
-                          <p className="text-teal-950 font-bold pr-2">
-                            Material:{" "}
-                          </p>
-                          {post.material}
-                        </p>
-                        <p className="text-sm text-teal-900 font-bold font-poppins flex px-2">
-                          <p className="text-teal-950 font-bold pr-2">
-                            Variation:{" "}
-                          </p>
-                          {post.variation}
-                        </p>
-                        <p className="text-sm text-teal-900 font-bold font-poppins flex  px-2">
-                          <p className="text-teal-950 font-bold pr-2">
-                            Gender:
-                          </p>
-                          {post.type}
-                        </p>
-                        <p className="px-2 text-teal-900 font-bold font-poppins flex">
-                          <p className="text-teal-950 font-bold pr-2">
-                            Item Stocks:
-                          </p>
-                          {post.stock}
-                          <p>
-                            {" "}
+                        <div className="grid">
+                          <p className="px-2  py-1 text-teal-950 font-bold font-poppins">
+                            Product Specification:
                             {!isAuth ? (
                               <></>
                             ) : (
-                              <button className="pl-2">
-                                <Link to={`/MerchUpdate/${post._id}`}>
-                                  <FaEdit />
-                                </Link>
-                              </button>
+                              <>
+                                <button
+                                  className="grid text-red-600"
+                                  onClick={() => {
+                                    deleteMerch(post._id);
+                                  }}
+                                >
+                                  Delete
+                                </button>
+                              </>
                             )}
                           </p>
-                        </p>
-                        <div>
-                          <Button
-                            left={2}
-                            w={140}
-                            m={2}
-                            bg={"teal.400"}
-                            textColor={"black.200"}
-                            onClick={() => handleOpenModal(post)}
-                          >
-                            <p className="px-3">Purchase</p> <BsCart3 />
-                          </Button>
+
+                          <p className="px-1 py-1 text-teal-950 font-poppins flex">
+                            <p className="px-1 text-teal-900 font-bold">
+                              Colors:
+                            </p>
+                            {post.color}
+                          </p>
+
+                          <p className="px-1 py-1 text-teal-950 font-poppins flex">
+                            <p className="px-1 pr-2 font-bold">Sizes:</p>
+                            {post.plusSize}
+                          </p>
+
+                          <p className=" text-sm px-2 py-1 text-teal-900 font-bold font-poppins ssm:text-left ssm:flex lg:grid">
+                            <p className="text-teal-950 font-bold">
+                              Print type:
+                            </p>
+                            {post.Tprint}
+                          </p>
+                          <p className="text-sm px-2 text-teal-900 font-bold font-poppins flex ">
+                            <p className="text-teal-950 font-bold pr-2">
+                              Material:{" "}
+                            </p>
+                            {post.material}
+                          </p>
+                          <p className="text-sm text-teal-900 font-bold font-poppins flex px-2">
+                            <p className="text-teal-950 font-bold pr-2">
+                              Variation:{" "}
+                            </p>
+                            {post.variation}
+                          </p>
+                          <p className="text-sm text-teal-900 font-bold font-poppins flex  px-2">
+                            <p className="text-teal-950 font-bold pr-2">
+                              Gender:
+                            </p>
+                            {post.type}
+                          </p>
+                          <p className="px-2 text-teal-900 font-bold font-poppins flex">
+                            <p className="text-teal-950 font-bold pr-2">
+                              Item Stocks:
+                            </p>
+                            {post.stock}
+                            <p>
+                              {" "}
+                              {!isAuth ? (
+                                <></>
+                              ) : (
+                                <button className="pl-2">
+                                  <Link to={`/MerchUpdate/${post._id}`}>
+                                    <FaEdit />
+                                  </Link>
+                                </button>
+                              )}
+                            </p>
+                          </p>
+                          <div>
+                            <Button
+                              left={2}
+                              w={140}
+                              m={2}
+                              bg={"teal.400"}
+                              textColor={"black.200"}
+                              onClick={() => handleOpenModal(post)}
+                            >
+                              <p className="px-3">Purchase</p> <BsCart3 />
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                    </figure>
-                  </ul>
-                );
-              })
-              .reverse()}
+                      </figure>
+                    </ul>
+                  );
+                })
+                .reverse()}
+            </article>
           </article>
-        </article>
+        )}
+
         {selectedPostId && (
           <Modal
             blockScrollOnMount={false}
@@ -344,7 +388,11 @@ function Merch() {
                     value={quantity}
                     name="quantity"
                   >
-                    <NumberInputField required onChange={quantityHandler} />
+                    <NumberInputField
+                      disabled
+                      required
+                      onChange={quantityHandler}
+                    />
                     <NumberInputStepper>
                       <NumberIncrementStepper onClick={incrementQnty} />
                       <NumberDecrementStepper onClick={decrementQnty} />
