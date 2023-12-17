@@ -8,6 +8,7 @@ import {
   Skeleton,
   SkeletonCircle,
   SkeletonText,
+  Text,
   Box,
   Stack,
   Modal,
@@ -30,7 +31,8 @@ import { BsCart3 } from "react-icons/bs";
 import { useDisclosure } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
-
+import { Parallax } from "react-parallax";
+import bckImage from "../assets/ctu.jpg";
 function Merch() {
   const serverURL = import.meta.env.VITE_SERVER_URL;
   const navigate = useNavigate();
@@ -141,6 +143,26 @@ function Merch() {
   return (
     <>
       <main className="bg-cover bg-gradient-to-br from-[#233d52] via-[#173955] to-[#051431]">
+        <Box>
+          <Parallax
+            blur={{ min: -14, max: 15 }}
+            bgImage={bckImage}
+            bgImageSizes="contain"
+            strength={100}
+          >
+            <Box
+              style={{
+                justifyItems: "center",
+                textAlign: "center",
+                margin: "11%",
+              }}
+            >
+              <Text className="text-5xl  font-bebas tracking-widest md:text-5xl ssm:text-4xl">
+                UNIVERSITY MERCH
+              </Text>
+            </Box>
+          </Parallax>
+        </Box>
         {isLoading ? (
           <center class="pt-5 py-6">
             <Stack width="80%">

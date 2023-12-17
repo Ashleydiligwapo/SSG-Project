@@ -221,10 +221,9 @@ function Footer() {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        <Text className="font-quicksand">
-          <b>DANAO CTU - SABANG</b>
-          <br />
-          COT OFFICE SECOND FLOOR <br /> © 2022 - 2023 SSG
+        <Text className="font-quicksand ssm:grid">
+          <b>DANAO CTU - SABANG </b>
+          COT OFFICE SECOND FLOOR © 2022 - 2023 SSG
         </Text>
       </Container>
     </Box>

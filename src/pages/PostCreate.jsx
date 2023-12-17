@@ -17,6 +17,12 @@ import { MultiSelect } from "primereact/multiselect";
 function PostCreate({ isAuth }) {
   const serverURL = import.meta.env.VITE_SERVER_URL;
   const [lists, setLists] = useState([]);
+  const [reportData, setReportData] = useState({
+    title: "",
+    link: "",
+    image: "",
+    information: "",
+  });
   const [datainForm, setDatainForm] = useState({
     title: "",
     Date: "",
@@ -83,6 +89,24 @@ function PostCreate({ isAuth }) {
       })
       .catch((err) => {
         console.log("Error creating: ", err);
+      });
+  };
+
+  const reportPost = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${serverURL}/api/reports`, reportData)
+      .then((result) => {
+        setReportData({
+          title: "",
+          link: "",
+          image: "",
+          information: "",
+        });
+        navigate("/Engage");
+      })
+      .catch((err) => {
+        console.log("Error", err);
       });
   };
 
@@ -511,6 +535,73 @@ function PostCreate({ isAuth }) {
             <button
               type="submit"
               className="my-1 p-2 rounded-md bg-[#3fcf76] cursor-pointer hover:bg-[#4cdba4] transition-colors text-[#184f57]"
+            >
+              DONE
+            </button>
+          </form>
+        </figure>
+      </article>
+      <article className=" py-10 mx-auto ssm:max-w-md sm:max-w-1xl md:max-w-2xl lg:max-w-5xl">
+        <figure className="rounded-md bg-gradient-to-br from-[#f0e550] via-[#e0be42] to-[#d8c944] max-h-full pt-5 pb-5 px-10 my-5 mx-auto">
+          <Text className="text-center text-[#183258] py-2 m-5 font-poppins font-semibold">
+            Add Narrative Reports
+          </Text>
+          <form onSubmit={reportPost}>
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              placeholder="Input Title"
+              name="title"
+              value={reportData.title}
+              onChange={(event) => {
+                setReportData({
+                  ...reportData,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              placeholder="Input GDrive Link"
+              name="link"
+              value={reportData.link}
+              onChange={(event) => {
+                setReportData({
+                  ...reportData,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              placeholder="Input Image"
+              name="image"
+              value={reportData.image}
+              onChange={(event) => {
+                setReportData({
+                  ...reportData,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              name="information"
+              placeholder="Input Information here"
+              value={reportData.information}
+              onChange={(event) => {
+                setReportData({
+                  ...reportData,
+                  [event.target.name]: event.target.value,
+                });
+              }}
+            />
+            <button
+              type="submit"
+              className="my-1  p-2 rounded-md bg-[#3fcf76] cursor-pointer hover:bg-[#4cdba4] transition-colors text-[#184f57]"
             >
               DONE
             </button>

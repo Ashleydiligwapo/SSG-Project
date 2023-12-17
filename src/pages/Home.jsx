@@ -167,7 +167,7 @@ function Home() {
                             </p>
 
                             <ShowMoreText
-                              lines={5}
+                              lines={3}
                               className="content-css md:px-1 md:py-2 ssm:px-0 ssm:py-0"
                               less={<IoCaretUpSharp />}
                               more={<IoCaretDownOutline />}

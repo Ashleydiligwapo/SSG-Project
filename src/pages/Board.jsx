@@ -75,7 +75,7 @@ function Board() {
       </h1>
       <article className=" container mx-auto py-8">
         <figure
-          data-aos="fade-up"
+          // data-aos="fade-up"
           className="grid  grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4"
         >
           {electedItems.map((item) => (
@@ -110,7 +110,7 @@ function Board() {
       </h1>
       <article class="container mx-auto py-8">
         <figure
-          data-aos="fade-down"
+          // data-aos="fade-down"
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
         >
           {governorsItems.map((item) => (
@@ -143,7 +143,7 @@ function Board() {
       </h1>
       <article class="container mx-auto py-8">
         <figure
-          data-aos="fade-up"
+          // data-aos="fade-up"
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
         >
           {appointedItems.map((item) => (

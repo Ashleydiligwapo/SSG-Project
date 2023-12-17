@@ -20,6 +20,8 @@ import Merch from "./pages/Merch";
 import MerchUpdate from "./pages/MerchUpdate";
 import Navigation from "./components/Navigation";
 import SideDrawer from "./components/SideDrawer";
+
+import Engage from "./pages/Engage";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -50,6 +52,7 @@ function App() {
           path="/SideDrawer"
           element={<SideDrawer isAuth={isAuth} />}
         ></Route>
+        <Route path="/Engage" element={<Engage isAuth={isAuth} />} />
       </Routes>
       <div>
         <Footer />

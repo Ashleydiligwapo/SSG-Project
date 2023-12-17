@@ -84,9 +84,19 @@ function MenuBar() {
         >
           More
         </MenuButton>
+
         <MenuList>
           <MenuItem>
+            <Link to="/Engage">Engagements</Link>
+          </MenuItem>
+          <MenuItem>
             <Link to="/FreedomCode">Freedom Code</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link>Council Meetings</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link>Certificates</Link>
           </MenuItem>
         </MenuList>
       </Menu>
