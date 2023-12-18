@@ -3,6 +3,7 @@ import OfficerBg from "../components/OfficerBg";
 import JSONFile from "../components/JSON/data.file.officers.json";
 import { AttachmentIcon } from "@chakra-ui/icons";
 import { Text } from "@chakra-ui/react";
+
 function Board() {
   const [electedItems, setElectedItems] = useState([]);
   const [governorsItems, setGovernorsItems] = useState([]);
@@ -38,6 +39,7 @@ function Board() {
           reforms that have transformed CTU is what it is.
         </Text>
       </figure>
+
       <h1 className="py-20 text-4xl text-center uppercase text-white font-quicksand ">
         EXECUTIVE HEAD
       </h1>

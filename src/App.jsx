@@ -22,6 +22,11 @@ import Navigation from "./components/Navigation";
 import SideDrawer from "./components/SideDrawer";
 
 import Engage from "./pages/Engage";
+import Meetings from "./pages/Meetings";
+import Certificates from "./pages/Certificates";
+import Orgranization from "./pages/Orgranization";
+import Clubs from "./pages/Clubs";
+import Departments from "./pages/Departments";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -43,16 +48,18 @@ function App() {
         <Route
           path="/MerchUpdate/:id"
           element={<MerchUpdate isAuth={isAuth} />}
-        ></Route>
-        <Route
-          path="/Navigation"
-          element={<Navigation isAuth={isAuth} />}
-        ></Route>
-        <Route
-          path="/SideDrawer"
-          element={<SideDrawer isAuth={isAuth} />}
-        ></Route>
+        />
+        <Route path="/Navigation" element={<Navigation isAuth={isAuth} />} />
+        <Route path="/SideDrawer" element={<SideDrawer isAuth={isAuth} />} />
         <Route path="/Engage" element={<Engage isAuth={isAuth} />} />
+        <Route path="/Meetings" element={<Meetings isAuth={isAuth} />} />
+        <Route path="/Certificates" element={<Certificates />} />
+        <Route
+          path="/Organization"
+          element={<Orgranization isAuth={isAuth} />}
+        />
+        <Route path="/Clubs" element={<Clubs isAuth={isAuth} />} />
+        <Route path="/Departments" element={<Departments isAuth={isAuth} />} />
       </Routes>
       <div>
         <Footer />

@@ -55,9 +55,15 @@ function MenuBar() {
           Organizations
         </MenuButton>
         <MenuList>
-          <MenuItem>CTU Organizations</MenuItem>
-          <MenuItem>Campus - Clubs</MenuItem>
-          <MenuItem>Departments</MenuItem>
+          <MenuItem>
+            <Link to="/Organization">CTU Organizations</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/Clubs">Campus - Clubs</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/Departments">Departments</Link>
+          </MenuItem>
         </MenuList>
       </Menu>
       <Menu>
@@ -93,10 +99,10 @@ function MenuBar() {
             <Link to="/FreedomCode">Freedom Code</Link>
           </MenuItem>
           <MenuItem>
-            <Link>Council Meetings</Link>
+            <Link to="/Meetings">Council Meetings</Link>
           </MenuItem>
           <MenuItem>
-            <Link>Certificates</Link>
+            <Link to="/Certificates">Certificates</Link>
           </MenuItem>
         </MenuList>
       </Menu>

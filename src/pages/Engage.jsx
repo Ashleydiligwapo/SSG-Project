@@ -72,7 +72,7 @@ function Engage() {
             }}
           >
             <Text className="text-5xl  font-bebas tracking-widest md:text-5xl ssm:text-4xl">
-              NARRATIVE REPORT
+              NARRATIVE REPORTS
             </Text>
           </Box>
         </Parallax>
@@ -110,13 +110,13 @@ function Engage() {
         </center>
       ) : (
         <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-7xl">
-          <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+          <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {reports
               .map((post) => {
                 return (
                   <ul>
                     <figure
-                      className="max-h-full max-w-96 w-72 m-6 bg-gradient-to-r from-[#f0ebdd] via-[#f1eed6] to-[#ddd4bb] font-quicksand my-10 ssm:text-center   sm:text-center md:m-6  md:w-72 ssm:w-52 ssm:m-0 ssm:mt-6"
+                      className="max-h-96 max-w-96  m-6 bg-gradient-to-r from-[#ebe8e0] via-[#f7f4e7] to-[#f0efed] font-quicksand my-10 rounded-x ssm:pb-5 ssm:text-center sm:max-h-full sm:pb-5 sm:text-center md:pb-1 "
                       key={post._id}
                     >
                       <li>

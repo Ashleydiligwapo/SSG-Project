@@ -6,6 +6,9 @@ import { auth, db, storage } from "../firebase";
 import { listAll, getDownloadURL, ref } from "firebase/storage";
 import Footer from "../components/Footer";
 import bg from "../assets/building.png";
+import { Box, Text } from "@chakra-ui/react";
+import { Parallax } from "react-parallax";
+import bckImage from "../assets/ctu.jpg";
 function FreedomCode({ isAuth }) {
   const [postLists, setPostLists] = useState([]);
   const [imageLists, setImageLists] = useState([]);
@@ -36,7 +39,27 @@ function FreedomCode({ isAuth }) {
 
   return (
     <div>
-      <main className="max-w-full max-h-full m-0 bg-gradient-to-br  from-[#224866] via-[#073255] to-[#051431]">
+      <main className="max-w-full max-h-full m-0 bg-gradient-to-br  from-[#224866] via-[#073255] to-[#051431] ">
+        <Box>
+          <Parallax
+            blur={{ min: -14, max: 15 }}
+            bgImage={bckImage}
+            bgImageSizes="contain"
+            strength={100}
+          >
+            <Box
+              style={{
+                justifyItems: "center",
+                textAlign: "center",
+                margin: "11%",
+              }}
+            >
+              <Text className="text-5xl  font-bebas tracking-widest md:text-5xl ssm:text-4xl text-white">
+                SSG - FREEDOM CODE
+              </Text>
+            </Box>
+          </Parallax>
+        </Box>
         <article className="container mx-auto  py-8">
           <figure className="grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 ">
             {postLists.map((post) => {
