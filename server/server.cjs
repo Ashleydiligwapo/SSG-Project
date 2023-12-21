@@ -4,6 +4,7 @@ const connectDB = require("./connectDB.cjs");
 const Lists = require("./Lists.cjs");
 const Merch = require("./Merch.cjs");
 const Reports = require("./Reports.cjs");
+const Lanyards = require("./Lanyards.cjs");
 const { default: mongoose } = require("mongoose");
 const bodyParser = require('body-parser');
 const cors = require("cors");
@@ -75,6 +76,50 @@ app.delete("/api/reports:id", (req,res) => {
 });
 
 ////////////    REPORTS API  /////////////
+
+////////////     LANYARDS API /////////////
+app.get("/api/lanyards", (req, res) => {
+    Lanyards.find()
+    .then((result) => {
+        res.json(result)
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.get("/api/lanyards/:id", (req, res) => {
+    Lanyards.findById(req.params.id, req.body)
+    .then((result) => {
+        res.json(result)
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.post("/api/lanyards", (req, res) => {
+    Lanyards.create(req.body)
+    .then((result) => {
+        res.json("Submitted:")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.put("/api/lanyards/:id", (req, res) => {
+    Lanyards.findByIdAndUpdate(req.params.id,  req.body)
+    .then((result) => {
+        res.json("Updated")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.delete("/api/lanyards/:id", (req,res) => {
+    Lanyards.findByIdAndRemove(req.params.id, req.body)
+    .then((result) => {
+        res.json("Removed")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+///////////      LANYARDS API  /////////////
+
 ////////////   MERCH API /////////////////
 app.get("/api/merches", (req, res) => {
     Merch.find()

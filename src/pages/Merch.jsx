@@ -195,6 +195,13 @@ function Merch() {
           </center>
         ) : (
           <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-7xl">
+            <Text className="text-center py-5 text-4xl font-orbitron text-teal-100">
+              PROCESS OF ORDERING
+            </Text>
+            <Text className="text-center py-1 text-1xl font-orbitron text-teal-100">
+              Choose and purchase the item, read the message to your email after
+              purchasing.
+            </Text>
             <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
               {merchLists
                 .map((post) => {

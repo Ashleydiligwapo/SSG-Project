@@ -17,6 +17,12 @@ import { MultiSelect } from "primereact/multiselect";
 function PostCreate({ isAuth }) {
   const serverURL = import.meta.env.VITE_SERVER_URL;
   const [lists, setLists] = useState([]);
+  const [lanyardsData, setLanyards] = useState({
+    name: "",
+    price: "",
+    image: "",
+    department: "",
+  });
   const [reportData, setReportData] = useState({
     title: "",
     link: "",
@@ -107,6 +113,24 @@ function PostCreate({ isAuth }) {
       })
       .catch((err) => {
         console.log("Error", err);
+      });
+  };
+
+  const lanyardsPost = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${serverURL}/api/lanyards`, lanyardsData)
+      .then((result) => {
+        setLanyards({
+          name: "",
+          price: "",
+          image: "",
+          department: "",
+        });
+        navigate("/Lanyards");
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
       });
   };
 
@@ -598,6 +622,73 @@ function PostCreate({ isAuth }) {
                   [event.target.name]: event.target.value,
                 });
               }}
+            />
+            <button
+              type="submit"
+              className="my-1  p-2 rounded-md bg-[#3fcf76] cursor-pointer hover:bg-[#4cdba4] transition-colors text-[#184f57]"
+            >
+              DONE
+            </button>
+          </form>
+        </figure>
+      </article>
+      <article className=" py-10 mx-auto ssm:max-w-md sm:max-w-1xl md:max-w-2xl lg:max-w-5xl">
+        <figure className="rounded-md bg-gradient-to-br from-[#f0e550] via-[#e0be42] to-[#d8c944] max-h-full pt-5 pb-5 px-10 my-5 mx-auto">
+          <Text className="text-center text-[#183258] py-2 m-5 font-poppins font-semibold">
+            Add Lanyards Item
+          </Text>
+          <form onSubmit={lanyardsPost}>
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              name="name"
+              value={lanyardsData.name}
+              placeholder="Input lanyard name: "
+              onChange={(event) =>
+                setLanyards({
+                  ...lanyardsData,
+                  [event.target.name]: event.target.value,
+                })
+              }
+            />
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="number"
+              name="price"
+              value={lanyardsData.price}
+              placeholder="Price: "
+              onChange={(event) =>
+                setLanyards({
+                  ...lanyardsData,
+                  [event.target.name]: event.target.value,
+                })
+              }
+            />
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              name="image"
+              value={lanyardsData.image}
+              placeholder="Input Image link: "
+              onChange={(event) =>
+                setLanyards({
+                  ...lanyardsData,
+                  [event.target.name]: event.target.value,
+                })
+              }
+            />
+            <input
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              name="department"
+              value={lanyardsData.department}
+              placeholder="Input the department name or university sling: "
+              onChange={(event) =>
+                setLanyards({
+                  ...lanyardsData,
+                  [event.target.name]: event.target.value,
+                })
+              }
             />
             <button
               type="submit"

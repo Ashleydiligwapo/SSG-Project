@@ -41,7 +41,7 @@ function MenuBar() {
             <Link to="/Merch">University - Merch</Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/Lanyads">Lanyards</Link>
+            <Link to="/Lanyards">Lanyards</Link>
           </MenuItem>
         </MenuList>
       </Menu>

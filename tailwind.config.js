@@ -38,6 +38,10 @@ module.exports = {
       'roboto': ['Roboto Mono', 'monospace'],
       'poppins': ['Poppins', 'sans-serif'],
       'quicksand': ['Quicksand', 'sans-serif'],
+      'bungee': ['Bungee', 'sans-serif'],
+      'monoton': ['Monoton', 'sans-serif'],
+      'orbitron': ['Orbitron', 'sans-serif'],
+      'montserrat': ['Montserrat', 'sans-serif'],
     },
  
   },
