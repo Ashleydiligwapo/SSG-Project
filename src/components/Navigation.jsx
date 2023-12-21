@@ -84,14 +84,24 @@ export default function Navigation() {
             spacing={4}
             display={{ base: "none", md: "none", lg: "flex" }}
           >
-            <Link to="/">Home</Link>
+            <Link
+              className="text-center p-3  font-semibold rounded-md hover:bg-gray-200"
+              to="/"
+            >
+              Home
+            </Link>
 
             <MenuBar />
             {!isAuth ? (
               <div></div>
             ) : (
               <>
-                <Link to="/PostCreate">Post</Link>
+                <Link
+                  className="text-center p-3  font-semibold rounded-md hover:bg-gray-200"
+                  to="/PostCreate"
+                >
+                  Post
+                </Link>
                 <Button onClick={signUserOut}>
                   <MdOutlineLogout />
                 </Button>
