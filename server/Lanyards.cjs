@@ -14,6 +14,9 @@ const LanyardsSchema = new Schema ({
     department: {
         type: String,
     },
+    course: {
+        type: String,
+    },
     // availability :{
     //     //if required.
     //     type: String,

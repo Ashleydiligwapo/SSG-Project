@@ -42,17 +42,16 @@ function Engage() {
         console.log("Error fetch Data.", err);
       });
   }, []);
-
-  const deleteReport = (id) => {
-    // window.location.reload();
+  const deleteMerch = (id) => {
+    window.location.reload();
     axios
       .delete(`${serverURL}/api/reports/${id}`)
       .then((result) => {
-        alert("Deleted.");
+        alert("Success deleting:");
         navigate("/Engage");
       })
       .catch((err) => {
-        console.log("Error deleting: ", err);
+        console.log("Error deleting merch:", err);
       });
   };
   return (
@@ -138,14 +137,16 @@ function Engage() {
                           {!isAuth ? (
                             <></>
                           ) : (
-                            <Button
-                              onClick={() => {
-                                deleteReport(post._id);
-                              }}
-                              className="delete float-right"
-                            >
-                              Delete
-                            </Button>
+                            <>
+                              <button
+                                className="grid text-red-600"
+                                onClick={() => {
+                                  deleteMerch(post._id);
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </>
                           )}
                         </div>
                       </li>

@@ -22,6 +22,7 @@ function PostCreate({ isAuth }) {
     price: "",
     image: "",
     department: "",
+    course: "",
   });
   const [reportData, setReportData] = useState({
     title: "",
@@ -126,6 +127,7 @@ function PostCreate({ isAuth }) {
           price: "",
           image: "",
           department: "",
+          course: "",
         });
         navigate("/Lanyards");
       })
@@ -638,7 +640,7 @@ function PostCreate({ isAuth }) {
             Add Lanyards Item
           </Text>
           <form onSubmit={lanyardsPost}>
-            <input
+            {/* <input
               className="my-2 px-2 p-2 m-2 rounded-sm w-21"
               type="text"
               name="name"
@@ -650,7 +652,7 @@ function PostCreate({ isAuth }) {
                   [event.target.name]: event.target.value,
                 })
               }
-            />
+            /> */}
             <input
               className="my-2 px-2 p-2 m-2 rounded-sm w-21"
               type="number"
@@ -677,19 +679,68 @@ function PostCreate({ isAuth }) {
                 })
               }
             />
-            <input
+            <br />
+            <select
               className="my-2 px-2 p-2 m-2 rounded-sm w-21"
               type="text"
               name="department"
               value={lanyardsData.department}
-              placeholder="Input the department name or university sling: "
               onChange={(event) =>
                 setLanyards({
                   ...lanyardsData,
                   [event.target.name]: event.target.value,
                 })
               }
-            />
+            >
+              <option value="University">University</option>
+              <option value="College of Engineering">
+                College of Engineering
+              </option>
+
+              <option value="College of Education">College of Education</option>
+              <option value="College of Management and Entrepreneurship">
+                College of Management
+              </option>
+              <option value="College of Technology ">
+                College of Technology
+              </option>
+              <option value="College of Tourism ">College of Tourism</option>
+            </select>
+            <select
+              className="my-2 px-2 p-2 m-2 rounded-sm w-21"
+              type="text"
+              name="course"
+              value={lanyardsData.course}
+              onChange={(event) =>
+                setLanyards({
+                  ...lanyardsData,
+                  [event.target.name]: event.target.value,
+                })
+              }
+            >
+              <option value="CTU-Univ">CTU-Univ</option>
+              <option value="CME LANYARD">CME LANYARD</option>
+              <option value="COT LANYARD">COT LANYARD</option>
+              <option value="CEAS LANYARD">CEAS LANYARD</option>
+              <option value="COE LANYARD">COE LANYARD</option>
+
+              <option value="BSIT">BSIT</option>
+              <option value="BSMX">BSMX</option>
+              <option value="BIT-COMPUTER">BIT-COMPUTER</option>
+              <option value="BIT-DRAFTING">BIT-DRAFTING</option>
+              <option value="BIT-ELECTRICAL">BIT-ELECTRICAL</option>
+              <option value="BIT-ELECTRONICS">BIT-ELECTRONICS</option>
+              <option value=""></option>
+              <option value="BSME">BSME</option>
+              <option value="BSEE">BSEE</option>
+              <option value="BSIE">BSIE</option>
+              <option value="BSCPE">BSCPE</option>
+              <option value="BSCE">BSCE</option>
+              <option value=""></option>
+              <option value="BSHM">BSHM</option>
+              <option value="BSTM">BSTM</option>
+              <option value="BSBA">BSBA</option>
+            </select>
             <button
               type="submit"
               className="my-1  p-2 rounded-md bg-[#3fcf76] cursor-pointer hover:bg-[#4cdba4] transition-colors text-[#184f57]"

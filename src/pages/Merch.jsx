@@ -212,17 +212,19 @@ function Merch() {
                         className="max-h-full max-w-full  rounded-xl m-2 bg-gradient-to-r from-[#d8ce92] via-[#e0ddc3] to-[#eedb9c] font-quicksand my-10 rounded-x ssm:pb-5 ssm:grid ssm:text-center sm:max-h-full sm:pb-5 sm: md:pb-1 md:flex md:text-justify md:h-96 lg:p-0  "
                         key={post._id}
                       >
-                        <div className="relative ">
-                          <img
-                            className="max-h-96 w-96 object-cover  rounded-xl ssm:w-full ssm:h-full sm:h-full  lg:h-full md:h-full"
-                            src={post.image}
-                            alt={`Image ${post.id}`}
-                          />
+                        <div className="relative hover:scale-105 transition duration-300 cursor-pointer">
+                          <a href={post.image} target="_blank">
+                            <img
+                              className="max-h-96 w-96 object-cover  rounded-xl ssm:w-full ssm:h-full sm:h-full  lg:h-full md:h-full"
+                              src={post.image}
+                              alt={`Image ${post.id}`}
+                            />
+                          </a>
                           <div
                             className="absolute px-5 py-5 bottom-0 left-0 right-0 bg-gradient-to-t from-[#32a6c99a] via-[#5cc8db28]
                          to-[#147c9600] rounded-b-md "
                           >
-                            <h3 class="z-10 overflow-hidden text-left mb-1 text-3xl font-bold font-poppins text-emerald-700">
+                            <h3 class="z-10 overflow-hidden text-left mb-1 text-2xl font-bold font-orbitron italic text-emerald-900">
                               {post.name}
                             </h3>
                             <div class="z-10 bg-slate-900  gap-y-1 overflow-hidden text-1xl leading-3 p-3 w-24 rounded-2xl font-extrabold text-teal-500">
