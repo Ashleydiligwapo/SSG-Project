@@ -35,13 +35,13 @@ function ChakraSlider() {
     },
     {
       title: "Services and Leaderships",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+      text: "The CTU Danao - SSG is the highest governing council, dedicated to serve the collective interests of the student body through the organization of programs, initiatives, and events, as well as acting as a bridge between the school administration and the student population to satisfy the demands of a better campus life. ",
       image:
         "https://f005.backblazeb2.com/file/MERN-Project/395346655_1383285495632752_8937385563233366527_n.jpg",
     },
     {
       title: "Services and Leaderships",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+      text: "The CTU Danao - SSG is the highest governing council, dedicated to serve the collective interests of the student body by planning programs, projects, and activities, as well as acting as a liaison between the school administration and the student body in order to meet the needs of a better campus life. ",
       image: "https://f005.backblazeb2.com/file/MERN-Project/OFFICERS/ssg3.jpg",
     },
   ];
@@ -127,8 +127,9 @@ function ChakraSlider() {
                   </Text>
                 </Heading>
                 <Text
-                  className="text-lg tracking-normal"
+                  className=" font-montserrat tracking-normal"
                   fontSize={{ base: "lg", lg: "2xl" }}
+                  w={{ base: "sm", md: "3xl" }}
                   color="white"
                 >
                   {card.text}
