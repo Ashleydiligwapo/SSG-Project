@@ -163,6 +163,10 @@ function Merch() {
             </Box>
           </Parallax>
         </Box>
+        <Text className="text-center py-5 text-4xl font-orbitron text-teal-100">
+          PROCESS OF ORDERING
+        </Text>
+
         {isLoading ? (
           <center class="pt-5 py-6">
             <Stack width="80%">
@@ -195,9 +199,6 @@ function Merch() {
           </center>
         ) : (
           <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-7xl">
-            <Text className="text-center py-5 text-4xl font-orbitron text-teal-100">
-              PROCESS OF ORDERING
-            </Text>
             <Text className="text-center py-1 text-1xl font-orbitron text-teal-100">
               Choose and purchase the item, read the message to your email after
               purchasing.
