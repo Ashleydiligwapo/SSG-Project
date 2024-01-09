@@ -18,7 +18,7 @@ import MenuBar from "./components/MenuBar";
 import Lanyards from "./pages/Lanyards";
 import Merch from "./pages/Merch";
 import MerchUpdate from "./pages/MerchUpdate";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/navigation";
 import SideDrawer from "./components/SideDrawer";
 
 import Engage from "./pages/Engage";
@@ -27,6 +27,7 @@ import Certificates from "./pages/Certificates";
 import Orgranization from "./pages/Orgranization";
 import Clubs from "./pages/Clubs";
 import Departments from "./pages/Departments";
+import Dashboard from "./pages/Dashboard";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -60,6 +61,7 @@ function App() {
         />
         <Route path="/Clubs" element={<Clubs isAuth={isAuth} />} />
         <Route path="/Departments" element={<Departments isAuth={isAuth} />} />
+        <Route path="/Dashboard" element={<Dashboard isAuth={isAuth} />} />
       </Routes>
       <div>
         <Footer />

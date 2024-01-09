@@ -5,6 +5,7 @@ const Lists = require("./Lists.cjs");
 const Merch = require("./Merch.cjs");
 const Reports = require("./Reports.cjs");
 const Lanyards = require("./Lanyards.cjs");
+const MerchPurchased = require("./MerchPurchased.cjs");
 const { default: mongoose } = require("mongoose");
 const bodyParser = require('body-parser');
 const cors = require("cors");
@@ -32,6 +33,51 @@ app.use(bodyParser.json());
 //         isAppointed: Boolean
 // });
 // const Officers = mongoose.model('Officers',officersLists);
+//////////////    PURCHASED ITEMS //////////
+
+app.get("/api/merchpurchaseds", (req, res) => {
+    MerchPurchased.find()
+    .then((result) => {
+        res.json(result)
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.get("/api/merchpurchaseds/:id", (req, res) => {
+    MerchPurchased.findById(req.params.id, req.body)
+    .then((result) => {
+        res.json(result)
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.post("/api/merchpurchaseds", (req, res) => {
+    MerchPurchased.create(req.body)
+    .then((result) => {
+        res.json("Submitted:")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.put("/api/merchpurchaseds:id", (req, res) => {
+    MerchPurchased.findByIdAndUpdate(req.params.id,  req.body)
+    .then((result) => {
+        res.json("Updated")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.delete("/api/merchpurchaseds:id", (req,res) => {
+    MerchPurchased.findByIdAndRemove(req.params.id, req.body)
+    .then((result) => {
+        res.json("Removed")
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+
+//////////////    PURCHASED ITEMS //////////
+
 ////////////   REPORTS API ///////////////
 
 app.get("/api/reports", (req, res) => {

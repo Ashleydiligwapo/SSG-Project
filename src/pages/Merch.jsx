@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import axios, { isAxiosError } from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase";
+import { auth, provider } from "../firebase";
 import {
   Button,
   Skeleton,
@@ -27,22 +27,24 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { BsCart3 } from "react-icons/bs";
-
+import { signInWithPopup } from "firebase/auth";
 import { useDisclosure } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 import { Parallax } from "react-parallax";
 import bckImage from "../assets/ctu.jpg";
+import { FaFacebookSquare, FaGoogle } from "react-icons/fa";
 function Merch() {
   const serverURL = import.meta.env.VITE_SERVER_URL;
   const navigate = useNavigate();
   const [merchLists, setMerchLists] = useState([]);
   const form = useRef();
   const [email, setEmail] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState();
   const [name, setName] = useState("");
   const { id } = useParams();
   const [isAuth, setIsAuth] = useState(false);
+  const [userAuth, setUserAuth] = useState(false);
   const [user] = useAuthState(auth);
   const buyModal = useDisclosure();
   const editModal = useDisclosure();
@@ -50,9 +52,38 @@ function Merch() {
   const [selectedPostId, setSelectedPostId] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  const [purchasedMerch, setPurchasedMerch] = useState({
+    to_name: "",
+    from_name: "",
+    total: "",
+    date: "",
+    department: "",
+    quantity: "",
+  });
+
+  const signInWithGoogle = () => {
+    // window.location.reload();
+    signInWithPopup(auth, provider).then((result) => {
+      localStorage.setItem("userAuth", true);
+
+      setUserAuth(true);
+      navigate("/Merch");
+    });
+  };
+
+  //Firebase Account as ADMIN
   useEffect(() => {
     if (user) {
       setIsAuth(user.email === "ashley.rodriguez@ctu.edu.ph");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      setUserAuth(user.email);
+      setUserAuth();
     }
   }, [user]);
 
@@ -82,6 +113,7 @@ function Merch() {
   };
 
   const quantityHandler = (e) => {
+    e.preventDefault();
     const newQuantity = parseInt(e.target.value, 10);
     setQuantity(newQuantity);
   };
@@ -99,6 +131,23 @@ function Merch() {
   const toast = useToast();
   const sendEmail = (e) => {
     e.preventDefault();
+
+    axios
+      .post(`${serverURL}/api/merchpurchaseds`, purchasedMerch)
+      .then((result) => {
+        setPurchasedMerch({
+          to_name: "",
+          from_name: "",
+          total: "",
+          date: "",
+          department: "",
+          quantity: "",
+        });
+        navigate("/Merch");
+      })
+      .catch((err) => {
+        console.log("Error purchase:", err);
+      });
 
     // window.location.reload();
     emailjs
@@ -352,11 +401,17 @@ function Merch() {
                     className="py-3 px-3 border-solid border-2 rounded-md"
                     type="text"
                     name="to_name"
-                    value={name}
+                    value={purchasedMerch.to_name}
                     placeholder="Full name"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
                     required
                   />
+
                   <input
                     className="text-white bg-transparent uppercase px-2 hidden"
                     type="text"
@@ -370,20 +425,35 @@ function Merch() {
                     value={selectedPostId.price}
                   ></input>
 
-                  <label className="text-teal-950">Email</label>
+                  <label className="text-teal-950">Confirm Email</label>
+
                   <input
-                    className="py-3 px-3 border-solid border-2 rounded-md"
+                    className="py-3 px-3 border-solid border-2 rounded-md "
                     type="email"
                     name="from_name"
+                    value={purchasedMerch.from_name}
                     placeholder="@email"
                     required
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
                   />
+
                   <label className="text-teal-950">Department:</label>
                   <select
                     className="py-3 px-3 border-solid border-2 rounded-md"
                     type="text"
                     name="department"
+                    value={purchasedMerch.department}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
                     placeholder="Input Department"
                     required
                   >
@@ -417,14 +487,16 @@ function Merch() {
                     type="number"
                     min={1}
                     max={10}
-                    value={quantity}
                     name="quantity"
+                    value={(purchasedMerch.quantity = quantity)}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
                   >
-                    <NumberInputField
-                      disabled
-                      required
-                      onChange={quantityHandler}
-                    />
+                    <NumberInputField required onChange={quantityHandler} />
                     <NumberInputStepper>
                       <NumberIncrementStepper onClick={incrementQnty} />
                       <NumberDecrementStepper onClick={decrementQnty} />
@@ -439,25 +511,68 @@ function Merch() {
                     size="md"
                     type="datetime-local"
                     name="date"
+                    value={purchasedMerch.date}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
                   />
+
                   <label className="text-teal-950">Message</label>
                   <textarea
                     className="py-1 px-3 border-solid border-2 rounded-md mb-5"
                     name="message"
                     required
                   />
-                  <p className="px-2 pb-2 py-1 text-2xl">
-                    Total: ₱{selectedPostId.price * quantity}
-                  </p>
-                  <input
-                    className="text-white bg-transparent uppercase px-2 hidden"
-                    type="text"
-                    name="total"
-                    value={selectedPostId.price * quantity}
-                  />
-                  <Button bg={"teal.400"} textColor={"black.200"} type="submit">
-                    Purchase
-                  </Button>
+
+                  {!userAuth ? (
+                    <>
+                      {" "}
+                      <Box>
+                        <Text className=" font-quicksand text-center py-1">
+                          Sign in first with <b>Google</b>
+                        </Text>
+                        <Button
+                          size="lg"
+                          width={"full"}
+                          background={"teal.200"}
+                          onClick={signInWithGoogle}
+                        >
+                          <FaGoogle size={30} color="teal" />
+                        </Button>
+                      </Box>
+                    </>
+                  ) : (
+                    <>
+                      <p className="px-2 pb-2 py-1 text-2xl">
+                        Total: ₱{selectedPostId.price * quantity}
+                      </p>
+                      <input
+                        className="text-white bg-transparent uppercase px-2 hidden"
+                        type="text"
+                        name="total"
+                        value={
+                          (purchasedMerch.total =
+                            selectedPostId.price * quantity)
+                        }
+                        onChange={(e) => {
+                          setPurchasedMerch({
+                            ...purchasedMerch,
+                            [e.target.name]: e.target.value,
+                          });
+                        }}
+                      />
+                      <Button
+                        bg={"teal.400"}
+                        textColor={"black.200"}
+                        type="submit"
+                      >
+                        Purchase
+                      </Button>
+                    </>
+                  )}
                 </form>
               </ModalBody>
             </ModalContent>

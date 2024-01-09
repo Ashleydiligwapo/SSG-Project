@@ -38,7 +38,7 @@ import { useEffect } from "react";
 export default function Navigation() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isAuth, setIsAuth] = useState(false);
-
+  const [userAuth, setUserAuth] = useState(false);
   const [user] = useAuthState(auth);
 
   useEffect(() => {
@@ -46,11 +46,16 @@ export default function Navigation() {
       setIsAuth(user.email === "ashley.rodriguez@ctu.edu.ph");
     }
   }, [user]);
-
+  useEffect(() => {
+    if (user) {
+      setUserAuth(user.email);
+    }
+  }, [user]);
   const signUserOut = () => {
     signOut(auth).then(() => {
       localStorage.clear();
       setIsAuth(false);
+      setUserAuth(false);
       window.location.pathname = "/";
     });
   };
@@ -101,6 +106,12 @@ export default function Navigation() {
                   to="/PostCreate"
                 >
                   Post
+                </Link>
+                <Link
+                  className="text-center p-3  font-semibold rounded-md hover:bg-gray-200"
+                  to="/Dashboard"
+                >
+                  Dashboard
                 </Link>
                 <Button onClick={signUserOut}>
                   <MdOutlineLogout />
