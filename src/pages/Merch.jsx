@@ -254,6 +254,14 @@ function Merch() {
               Choose and purchase the item, read the message to your email after
               purchasing.
             </Text>
+
+            <Link
+              className="text-center p-3  font-semibold rounded-md bg-white hover:bg-gray-600"
+              to="/Dashboard"
+            >
+              Dashboard
+            </Link>
+
             <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
               {merchLists
                 .map((post) => {

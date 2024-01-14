@@ -18,7 +18,7 @@ import MenuBar from "./components/MenuBar";
 import Lanyards from "./pages/Lanyards";
 import Merch from "./pages/Merch";
 import MerchUpdate from "./pages/MerchUpdate";
-import Navigation from "./components/navigation";
+
 import SideDrawer from "./components/SideDrawer";
 
 import Engage from "./pages/Engage";
@@ -50,7 +50,7 @@ function App() {
           path="/MerchUpdate/:id"
           element={<MerchUpdate isAuth={isAuth} />}
         />
-        <Route path="/Navigation" element={<Navigation isAuth={isAuth} />} />
+
         <Route path="/SideDrawer" element={<SideDrawer isAuth={isAuth} />} />
         <Route path="/Engage" element={<Engage isAuth={isAuth} />} />
         <Route path="/Meetings" element={<Meetings isAuth={isAuth} />} />
