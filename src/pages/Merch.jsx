@@ -61,6 +61,7 @@ function Merch() {
     date: "",
     department: "",
     quantity: "",
+    name: "",
   });
 
   const signInWithGoogle = () => {
@@ -142,6 +143,7 @@ function Merch() {
           date: "",
           department: "",
           quantity: "",
+          name: "",
         });
         navigate("/Merch");
       })
@@ -416,7 +418,13 @@ function Merch() {
                     className="text-white bg-transparent uppercase px-2 hidden"
                     type="text"
                     name="name"
-                    value={selectedPostId.name}
+                    value={(purchasedMerch.name = selectedPostId.name)}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
                   ></input>
                   <input
                     className="text-white bg-transparent uppercase px-2 hidden"

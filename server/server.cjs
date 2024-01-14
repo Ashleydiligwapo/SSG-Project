@@ -34,6 +34,33 @@ app.use(bodyParser.json());
 // });
 // const Officers = mongoose.model('Officers',officersLists);
 //////////////    PURCHASED ITEMS //////////
+app.get("/totalCount",  (req, res) => {
+   MerchPurchased.aggregate([ {
+      $group: {
+        _id: null,
+        totalCount: { $sum: '$total' }, 
+      }
+    }])
+    .then((result) => {
+      
+        res.json(result[0]);
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+
+app.get("/totalUsers",  (req, res) => {
+   MerchPurchased.aggregate([ {
+    $count: 'to_name',
+    }])
+    .then((result) => {
+      
+        res.json(result[0]);
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+
 
 app.get("/api/merchpurchaseds", (req, res) => {
     MerchPurchased.find()
@@ -171,6 +198,33 @@ app.get("/api/merches", (req, res) => {
     Merch.find()
     .then((result) => {
         res.json(result)
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+app.get("/merchjoinmerchpurchased",  (req, res) => {
+   Merch.aggregate([ 
+    {
+      $lookup: {
+        from: "merchpurchaseds",
+        localField: "name",
+      foreignField: "name",
+      as: "merchpurchaseds",
+      },
+    }, 
+    {
+        $unwind: "$merchpurchaseds",
+    },
+    {
+        $group: {
+            _id: "$name",
+            totalOfThisItems: { $sum: "$merchpurchaseds.total" },
+        },
+    }
+])
+    .then((result) => {
+      
+        res.json(result);
     }).catch((err) => {
         res.status(404).json(err);
     });
