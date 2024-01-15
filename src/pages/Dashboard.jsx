@@ -3,7 +3,7 @@ import axios from "axios";
 
 import ChartData from "./ChartData";
 import { Chart as ChartJS, defaults } from "chart.js";
-import { Bar, Line, Doughnut, Pie, PolarArea } from "react-chartjs-2";
+import { Bar, Doughnut, Pie, PolarArea, Radar, Line } from "react-chartjs-2";
 import {
   Table,
   Thead,
@@ -20,8 +20,11 @@ import { FaEdit } from "react-icons/fa";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
+import "chartjs-plugin-datalabels";
+
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
+
 function Dashboard() {
   const serverURL = import.meta.env.VITE_SERVER_URL;
   const { id } = useParams();
@@ -126,13 +129,12 @@ function Dashboard() {
       });
   }, []);
 
-  const userDelete = (id, e) => {
-    e.preventDefault();
+  const userDelete = (id) => {
     axios
       .delete(`${serverURL}/api/merchpurchaseds/${id}`)
       .then((result) => {
         alert("Delete Success: ");
-        navigate("/Dashboard");
+        navigate("/Merch");
       })
       .catch((err) => {
         console.log("Error Deleting:", err);
@@ -141,7 +143,6 @@ function Dashboard() {
 
   const Bardata = {
     labels: usersLists.map((data) => `${data.from_name} - ${data.name}`),
-    // labels: usersLists.map((data) => data.date),
 
     datasets: [
       {
@@ -241,23 +242,53 @@ function Dashboard() {
   return (
     <main className="max-h-full bg-gray-200">
       <figure className="max-h-full max-w-full px-3 py-5 bg-gray-200 ">
-        <article className="m-2 p-5 bg-gray-50 rounded-md">
-          <Bar data={Bardata} />
+        <article className="m-2 p-4 bg-gray-50 rounded-md pb-7 pt-5  ssm: h-screen md:h-80 lg:h-96">
+          <Bar
+            data={Bardata}
+            options={{
+              plugins: {
+                title: {
+                  display: true,
+                  text: "Users Purchased items information",
+                },
+              },
+            }}
+          />
         </article>
-        <article className="m-2 p-4 bg-gray-50 rounded-md pb-7 pt-5">
-          <Line data={itemsTotalEarned} />
+        <article className="m-2 p-4 bg-gray-50 rounded-md pb-7 pt-5 ssm:h-screen md:h-80 lg:h-64">
+          <Line
+            data={itemsTotalEarned}
+            options={{
+              plugins: {
+                title: {
+                  display: true,
+                  text: "Over all Sales of Purchased Items",
+                },
+              },
+            }}
+          />
         </article>
-        <article className="m-2 p-4  bg-gray-50 rounded-md pb-7 pt-5">
-          <Bar className="" data={itemsDatePurchased} />
+        <article className="m-2 p-4  bg-gray-50 rounded-md pb-5 pt-5 ssm:h-screen md:h-80 lg:h-64">
+          <Bar
+            data={itemsDatePurchased}
+            options={{
+              plugins: {
+                title: {
+                  display: true,
+                  text: "Date and Time of Purchased Items",
+                },
+              },
+            }}
+          />
         </article>
       </figure>
 
       <figure></figure>
-      <figure className="flex max-h-full max-w-full px-3 py-1 bg-gray-200 ">
-        <article className="m-2 p-4 w-96 bg-gray-50 rounded-md pb-7 pt-5">
+      <figure className="flex max-h-full max-w-4xl px-2  bg-gray-200 ssm:grid sm:grid md:grid md:max-w-full lg:flex lg:h-80">
+        <article className="m-6 p-10  bg-gray-50 rounded-md pb-4 pt-4">
           <Doughnut className="" data={countTotal} />
         </article>
-        <article className="m-2 p-4 w-96 bg-gray-50 rounded-md pb-7 pt-5">
+        <article className="m-6 p-4  bg-gray-50 rounded-md pb-4 pt-4">
           <Pie className="" data={usersAll} />
         </article>
       </figure>
@@ -332,9 +363,7 @@ function Dashboard() {
         </>
       ) : (
         <>
-          <div>
-            <p>Empty</p>
-          </div>
+          <div></div>
         </>
       )}
       {isAuth ? (
