@@ -23,6 +23,9 @@ const purchasedMerch = new Schema ({
     name: {
         type: String,
     },
+    prices: {
+        type: Number,
+    },
 });
 
 const MerchPurchased = mongoose.model('MerchPurchased', purchasedMerch);

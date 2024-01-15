@@ -62,6 +62,7 @@ function Merch() {
     department: "",
     quantity: "",
     name: "",
+    prices: "",
   });
 
   const signInWithGoogle = () => {
@@ -144,6 +145,7 @@ function Merch() {
           department: "",
           quantity: "",
           name: "",
+          prices: "",
         });
         navigate("/Merch");
       })
@@ -438,7 +440,7 @@ function Merch() {
                     className="text-white bg-transparent uppercase px-2 hidden"
                     type="number"
                     name="prices"
-                    value={selectedPostId.price}
+                    value={(purchasedMerch.prices = selectedPostId.price)}
                   ></input>
 
                   <label className="text-teal-950">Confirm Email</label>

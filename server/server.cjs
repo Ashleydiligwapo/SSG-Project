@@ -49,6 +49,22 @@ app.get("/totalCount",  (req, res) => {
     });
 });
 
+app.get("/dateTotal", (req, res) => {
+MerchPurchased.aggregate([ 
+    {
+      $lookup: {
+        from: "merchjoinmerchpurchased",
+        localField: "date",
+      foreignField: "_id",
+      as: "merchjoinmerchpurchased",
+      }, 
+    }]).then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+
 app.get("/totalUsers",  (req, res) => {
    MerchPurchased.aggregate([ {
     $count: 'to_name',
@@ -70,6 +86,7 @@ app.get("/api/merchpurchaseds", (req, res) => {
         res.status(404).json(err);
     });
 });
+
 app.get("/api/merchpurchaseds/:id", (req, res) => {
     MerchPurchased.findById(req.params.id, req.body)
     .then((result) => {
@@ -86,15 +103,15 @@ app.post("/api/merchpurchaseds", (req, res) => {
         res.status(404).json(err);
     });
 });
-app.put("/api/merchpurchaseds:id", (req, res) => {
-    MerchPurchased.findByIdAndUpdate(req.params.id,  req.body)
+app.put("/api/merchpurchaseds/:id", (req, res) => {
+   MerchPurchased.findByIdAndUpdate(req.params.id,  req.body)
     .then((result) => {
-        res.json("Updated")
+        res.json("updated")
     }).catch((err) => {
         res.status(404).json(err);
     });
 });
-app.delete("/api/merchpurchaseds:id", (req,res) => {
+app.delete("/api/merchpurchaseds/:id", (req,res) => {
     MerchPurchased.findByIdAndRemove(req.params.id, req.body)
     .then((result) => {
         res.json("Removed")
@@ -131,7 +148,7 @@ app.post("/api/reports", (req, res) => {
         res.status(404).json(err);
     });
 });
-app.put("/api/reports:id", (req, res) => {
+app.put("/api/reports/:id", (req, res) => {
     Reports.findByIdAndUpdate(req.params.id,  req.body)
     .then((result) => {
         res.json("Updated")
@@ -139,7 +156,7 @@ app.put("/api/reports:id", (req, res) => {
         res.status(404).json(err);
     });
 });
-app.delete("/api/reports:id", (req,res) => {
+app.delete("/api/reports/:id", (req,res) => {
     Reports.findByIdAndRemove(req.params.id, req.body)
     .then((result) => {
         res.json("Removed")
@@ -218,7 +235,10 @@ app.get("/merchjoinmerchpurchased",  (req, res) => {
     {
         $group: {
             _id: "$name",
+            date: { $push: "$merchpurchaseds.date" },
             totalOfThisItems: { $sum: "$merchpurchaseds.total" },
+          
+        
         },
     }
 ])
@@ -229,6 +249,26 @@ app.get("/merchjoinmerchpurchased",  (req, res) => {
         res.status(404).json(err);
     });
 });
+app.get("/merchjoinmerchpurchasedusers",  (req, res) => {
+   Merch.aggregate([ 
+    {
+      $lookup: {
+        from: "merchpurchaseds",
+        localField: "name",
+      foreignField: "name",
+      as: "merchpurchaseds",
+      },
+    }
+    
+])
+    .then((result) => {
+      
+        res.json(result);
+    }).catch((err) => {
+        res.status(404).json(err);
+    });
+});
+
 app.get("/api/merches/:id", (req, res) => {
     Merch.findById(req.params.id, req.body)
     .then((result) => {

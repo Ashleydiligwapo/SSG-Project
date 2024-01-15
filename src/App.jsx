@@ -28,6 +28,7 @@ import Orgranization from "./pages/Orgranization";
 import Clubs from "./pages/Clubs";
 import Departments from "./pages/Departments";
 import Dashboard from "./pages/Dashboard";
+import UserEdit from "./pages/UserEdit";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -50,7 +51,7 @@ function App() {
           path="/MerchUpdate/:id"
           element={<MerchUpdate isAuth={isAuth} />}
         />
-
+        <Route path="/UserEdit/:id" element={<UserEdit isAuth={isAuth} />} />
         <Route path="/SideDrawer" element={<SideDrawer isAuth={isAuth} />} />
         <Route path="/Engage" element={<Engage isAuth={isAuth} />} />
         <Route path="/Meetings" element={<Meetings isAuth={isAuth} />} />

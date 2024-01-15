@@ -1,26 +1,64 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 import ChartData from "./ChartData";
 import { Chart as ChartJS, defaults } from "chart.js";
-import { Bar, Line, Doughnut, Pie } from "react-chartjs-2";
+import { Bar, Line, Doughnut, Pie, PolarArea } from "react-chartjs-2";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  Button,
+  TableCaption,
+  TableContainer,
+} from "@chakra-ui/react";
+import { FaEdit } from "react-icons/fa";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 function Dashboard() {
   const serverURL = import.meta.env.VITE_SERVER_URL;
+  const { id } = useParams();
+  const [isAuth, setIsAuth] = useState(false);
+  const [user] = useAuthState(auth);
+  const [userAuth, setUserAuth] = useState(false);
   const navigate = useNavigate();
   const [usersLists, setUsersLists] = useState([]);
+  const [exactUser, setExactUser] = useState(user.email);
   const [loading, setIsLoading] = useState(true);
   const [joinMerch, setjoinMerch] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [merch, setMerch] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
+  const [joinMerchUsers, setjoinMerchUsers] = useState([]);
+  useEffect(() => {
+    if (user) {
+      setIsAuth(user.email === "ashley.rodriguez@ctu.edu.ph");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      setUserAuth(user.email);
+      setUserAuth();
+
+      console.log(user.email);
+    }
+  }, [user]);
+
   useEffect(() => {
     axios
       .get(`${serverURL}/api/merchpurchaseds`)
       .then((result) => {
         setIsLoading(false);
         setUsersLists(result.data);
+
         // setMerch(result.data);
         // setMerch(result.data.totalCount);
       })
@@ -76,6 +114,31 @@ function Dashboard() {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${serverURL}/merchjoinmerchpurchasedusers`)
+      .then((result) => {
+        console.log(result.data);
+        setjoinMerchUsers(result.data);
+      })
+      .catch((err) => {
+        console.log("Error fetch total", err);
+      });
+  }, []);
+
+  const userDelete = (id, e) => {
+    e.preventDefault();
+    axios
+      .delete(`${serverURL}/api/merchpurchaseds/${id}`)
+      .then((result) => {
+        alert("Delete Success: ");
+        navigate("/Dashboard");
+      })
+      .catch((err) => {
+        console.log("Error Deleting:", err);
+      });
+  };
+
   const Bardata = {
     labels: usersLists.map((data) => `${data.from_name} - ${data.name}`),
     // labels: usersLists.map((data) => data.date),
@@ -92,8 +155,10 @@ function Dashboard() {
           "#42e3ce",
           "#644cdc",
           "#c6a928",
+          "#192564",
           "#00bcd4",
-          "#00bcd4",
+          "#cc2e63",
+          "#174c47",
         ],
         borderRadius: 6,
         borderColor: "gray",
@@ -128,10 +193,10 @@ function Dashboard() {
     labels: ["Total of Users Purchasing:"],
     datasets: [
       {
-        label: "Over all total Sold Items.",
+        label: "Total of Users.",
         data: [totalUsers],
         fill: false,
-        backgroundColor: "#4ec980",
+        backgroundColor: "#129b8ec9",
         borderRadius: 6,
       },
     ],
@@ -146,7 +211,28 @@ function Dashboard() {
         label: "Over all total Sold Items.",
         data: joinMerch.map((data) => data.totalOfThisItems),
         fill: false,
+        backgroundColor: "#649801",
+        borderRadius: 6,
+      },
+    ],
+  };
+
+  const itemsDatePurchased = {
+    labels: usersLists.map((data) => data.date),
+
+    datasets: [
+      {
+        label: "Purchased Item on this time and Date.",
+        data: usersLists.map((data) => data.total),
+        fill: false,
         backgroundColor: "#009688",
+        borderRadius: 6,
+      },
+      {
+        label: "Total Items sold of this date.",
+        data: joinMerch.map((data) => data.totalOfThisItems),
+        fill: false,
+        backgroundColor: "#002118",
         borderRadius: 6,
       },
     ],
@@ -158,8 +244,15 @@ function Dashboard() {
         <article className="m-2 p-5 bg-gray-50 rounded-md">
           <Bar data={Bardata} />
         </article>
+        <article className="m-2 p-4 bg-gray-50 rounded-md pb-7 pt-5">
+          <Line data={itemsTotalEarned} />
+        </article>
+        <article className="m-2 p-4  bg-gray-50 rounded-md pb-7 pt-5">
+          <Bar className="" data={itemsDatePurchased} />
+        </article>
       </figure>
 
+      <figure></figure>
       <figure className="flex max-h-full max-w-full px-3 py-1 bg-gray-200 ">
         <article className="m-2 p-4 w-96 bg-gray-50 rounded-md pb-7 pt-5">
           <Doughnut className="" data={countTotal} />
@@ -168,23 +261,142 @@ function Dashboard() {
           <Pie className="" data={usersAll} />
         </article>
       </figure>
-      <figure>
-        <article className="m-2 p-4 bg-gray-50 rounded-md pb-7 pt-5">
-          <Line data={itemsTotalEarned} />
-        </article>
-      </figure>
-      <figure>
-        <article className="max-h-full max-w-full px-3 py-5 bg-gray-200 ">
-          {usersLists.map((post) => {
-            return (
-              <ul className="flex px-2" key={post._id}>
-                <p>{post.name}</p>
-                <p>{post.from_name}</p>
-              </ul>
-            );
-          })}
-        </article>
-      </figure>
+
+      {!userAuth ? (
+        <>
+          <figure>
+            <article className="max-h-full max-w-full px-3 py-5 bg-gray-200 ">
+              <TableContainer className="bg-white rounded-md  m-2">
+                <form>
+                  <input
+                    className="hidden"
+                    type="text"
+                    onChange={(e) => setExactUser(e.target.value)}
+                  />
+                </form>
+                <Table size="sm">
+                  <Thead>
+                    <Tr className="">
+                      <Th>Item Name</Th>
+                      <Th>User mail</Th>
+                      <Th>User Name</Th>
+                      <Th>Quantity</Th>
+                      <Th></Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {usersLists
+                      .filter((item) => {
+                        return exactUser.toLowerCase() === ""
+                          ? item
+                          : item.from_name.toLowerCase().includes(exactUser);
+                      })
+                      .map((post) => {
+                        return (
+                          <Tr key={post._id}>
+                            <Td>{post.name}</Td>
+                            <Td>{post.from_name}</Td>
+
+                            <Td>{post.to_name}</Td>
+                            <Td>
+                              {post.quantity}{" "}
+                              <Link
+                                className="pl-3"
+                                to={`/UserEdit/${post._id}`}
+                              >
+                                <Button bg={"teal.200"}>
+                                  {" "}
+                                  <FaEdit />
+                                </Button>
+                              </Link>
+                            </Td>
+
+                            <Button
+                              className="mt-2"
+                              bg={"red.300"}
+                              onClick={() => {
+                                userDelete(post._id);
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </Tr>
+                        );
+                      })}
+                  </Tbody>
+                  <Tfoot></Tfoot>
+                </Table>
+              </TableContainer>
+            </article>
+          </figure>
+        </>
+      ) : (
+        <>
+          <div>
+            <p>Empty</p>
+          </div>
+        </>
+      )}
+      {isAuth ? (
+        <>
+          <figure>
+            <article className="max-h-full max-w-full px-3 py-5 bg-gray-200 ">
+              <TableContainer>
+                <form>
+                  <input
+                    className="hidden"
+                    type="text"
+                    onChange={(e) => setExactUser(e.target.value)}
+                  />
+                </form>
+                <Table size="sm">
+                  <Thead>
+                    <Tr>
+                      <Th>Item Name</Th>
+                      <Th>User mail</Th>
+                      <Th>User Name</Th>
+                      <Th>Quantity</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {usersLists.map((post) => {
+                      return (
+                        <Tr key={post._id}>
+                          <Td>{post.name}</Td>
+                          <Td>{post.from_name}</Td>
+
+                          <Td>{post.to_name}</Td>
+                          <Td>
+                            {post.quantity}{" "}
+                            <Button bg={"teal.200"}>
+                              <Link to={`/UserEdit/${post._id}`}>
+                                {" "}
+                                <FaEdit />
+                              </Link>
+                            </Button>
+                          </Td>
+
+                          <Button
+                            bg={"red.300"}
+                            onClick={() => {
+                              userDelete(post._id);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </Tr>
+                      );
+                    })}
+                  </Tbody>
+                  <Tfoot></Tfoot>
+                </Table>
+              </TableContainer>
+            </article>
+          </figure>
+        </>
+      ) : (
+        <></>
+      )}
     </main>
   );
 }
