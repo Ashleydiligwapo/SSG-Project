@@ -107,12 +107,7 @@ export default function Navigation() {
                 >
                   Post
                 </Link>
-                <Link
-                  className="text-center p-3  font-semibold rounded-md hover:bg-gray-200"
-                  to="/Dashboard"
-                >
-                  Dashboard
-                </Link>
+
                 <Button onClick={signUserOut}>
                   <MdOutlineLogout />
                 </Button>

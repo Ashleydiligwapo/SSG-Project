@@ -371,7 +371,7 @@ function Dashboard() {
         <>
           <figure>
             <article className="max-h-full max-w-full px-3 py-5 bg-gray-200 ">
-              <TableContainer>
+              <TableContainer className="bg-white rounded-md  m-2">
                 <form>
                   <input
                     className="hidden"
