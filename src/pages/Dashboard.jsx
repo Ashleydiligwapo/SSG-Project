@@ -244,6 +244,7 @@ function Dashboard() {
       <figure className="max-h-full max-w-full px-3 py-5 bg-gray-200 ">
         <article className="m-2 p-4 bg-gray-50 rounded-md pb-7 pt-5  ssm: h-screen md:h-80 lg:h-96">
           <Bar
+            className="hidden"
             data={Bardata}
             options={{
               plugins: {

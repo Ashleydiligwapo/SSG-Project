@@ -43,6 +43,9 @@ function MenuBar() {
           <MenuItem>
             <Link to="/Lanyards">Lanyards</Link>
           </MenuItem>
+          <MenuItem>
+            <Link to="/Dashboard">Dashboard</Link>
+          </MenuItem>
         </MenuList>
       </Menu>
       <Menu>
