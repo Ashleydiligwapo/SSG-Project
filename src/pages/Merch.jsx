@@ -3,6 +3,7 @@ import axios, { isAxiosError } from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, provider } from "../firebase";
+import { CiShoppingCart } from "react-icons/ci";
 import {
   Button,
   Skeleton,
@@ -63,6 +64,7 @@ function Merch() {
     quantity: "",
     name: "",
     prices: "",
+    image: "",
   });
 
   const signInWithGoogle = () => {
@@ -146,6 +148,7 @@ function Merch() {
           quantity: "",
           name: "",
           prices: "",
+          image: "",
         });
         navigate("/Merch");
       })
@@ -216,10 +219,39 @@ function Merch() {
             </Box>
           </Parallax>
         </Box>
-        <Text className="text-center py-5 text-4xl font-orbitron text-teal-100">
-          PROCESS OF ORDERING
-        </Text>
+        {!userAuth ? (
+          <>
+            {" "}
+            <Button
+              className=" float-right mt-14 mr-16"
+              size="lg"
+              background={"teal.200"}
+              onClick={signInWithGoogle}
+            >
+              <p className="text-3xl ">
+                <CiShoppingCart size={30} color="teal" />
+              </p>
+            </Button>
+          </>
+        ) : (
+          <Link to="/Cart">
+            <Button className=" float-right mt-14 mr-16" size="lg">
+              <p className="text-3xl ">
+                <CiShoppingCart size={30} color="teal" />
+              </p>
+            </Button>
+          </Link>
+        )}
 
+        <figure>
+          <Text className="text-center py-5 text-4xl font-orbitron text-teal-100">
+            PROCESS OF ORDERING
+          </Text>
+          <Text className="text-center py-1 text-1xl font-orbitron text-teal-100">
+            Choose and purchase the item, read the message to your email after
+            purchasing.
+          </Text>
+        </figure>
         {isLoading ? (
           <center class="pt-5 py-6">
             <Stack width="80%">
@@ -252,11 +284,6 @@ function Merch() {
           </center>
         ) : (
           <article className="max-w-md mx-auto max-h-full rounded-xl overflow-hidden md:max-w-7xl">
-            <Text className="text-center py-1 text-1xl font-orbitron text-teal-100">
-              Choose and purchase the item, read the message to your email after
-              purchasing.
-            </Text>
-
             <article className="md:shrink-0 grid grid-cols-1 ssm:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
               {merchLists
                 .map((post) => {
@@ -416,6 +443,18 @@ function Merch() {
                     }}
                     required
                   />
+                  <input
+                    className="text-white bg-transparent uppercase px-2 hidden"
+                    type="text"
+                    name="image"
+                    value={(purchasedMerch.image = selectedPostId.image)}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
+                  ></input>
 
                   <input
                     className="text-white bg-transparent uppercase px-2 hidden"

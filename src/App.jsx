@@ -29,6 +29,7 @@ import Clubs from "./pages/Clubs";
 import Departments from "./pages/Departments";
 import Dashboard from "./pages/Dashboard";
 import UserEdit from "./pages/UserEdit";
+import Cart from "./pages/Cart";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   return (
@@ -63,6 +64,7 @@ function App() {
         <Route path="/Clubs" element={<Clubs isAuth={isAuth} />} />
         <Route path="/Departments" element={<Departments isAuth={isAuth} />} />
         <Route path="/Dashboard" element={<Dashboard isAuth={isAuth} />} />
+        <Route path="/Cart" element={<Cart isAuth={isAuth} />} />
       </Routes>
       <div>
         <Footer />
