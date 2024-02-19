@@ -13,11 +13,11 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 //this is to connect the database
 connectDB(); 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
-
+app.use(express.static('client/build'));
 // const officersLists = mongoose.Schema({
 //         name: String,
 //         facebook: String,

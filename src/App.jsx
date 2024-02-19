@@ -37,6 +37,7 @@ function App() {
       <div className="w-full">
         <Header />
       </div>
+
       <Routes>
         <Route path="/" element={<Home isAuth={isAuth} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />

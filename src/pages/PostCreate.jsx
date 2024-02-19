@@ -235,6 +235,8 @@ function PostCreate({ isAuth }) {
     { value: " Crewneck ", label: "Crewneck" },
     { value: " V-Neck ", label: "V-Neck" },
     { value: " Polo ", label: "Polo" },
+    { value: " Cap ", label: "Cap" },
+    { value: " Bag ", label: "Bag" },
     { value: " Jersey/Athletic ", label: "Jersey/Athletic" },
     // Add more options as needed
   ];

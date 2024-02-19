@@ -56,7 +56,7 @@ function UserEdit() {
       .put(`${serverURL}/api/merchpurchaseds/${id}`, data)
       .then((result) => {
         alert("Updated.");
-        navigate("/Dashboard");
+        navigate("/Cart");
       })
       .catch((err) => {
         console.log("Error updating.", err);

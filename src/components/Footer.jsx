@@ -90,8 +90,9 @@ function Footer() {
 
   return (
     <Box
-      className=" font-bebos"
-      bg={useColorModeValue("gray.50", "gray.900")}
+      className=" font-bebos "
+      // bg={useColorModeValue("red.50", "red.200")}
+      // bg={"orange.300"}
       color={useColorModeValue("gray.700", "gray.200")}
       bgImage={bgFooter}
       bgSize={"cover"}

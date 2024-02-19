@@ -54,7 +54,7 @@ function Merch() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState(0);
-
+  // const [exactUser, setExactUser] = useState(user.email);
   const [purchasedMerch, setPurchasedMerch] = useState({
     to_name: "",
     from_name: "",
@@ -67,8 +67,9 @@ function Merch() {
     image: "",
   });
 
-  const signInWithGoogle = () => {
+  const signInWithGoogle = (e) => {
     // window.location.reload();
+    e.preventDefault();
     signInWithPopup(auth, provider).then((result) => {
       localStorage.setItem("userAuth", true);
 
@@ -217,31 +218,38 @@ function Merch() {
                 UNIVERSITY MERCH
               </Text>
             </Box>
+            {!userAuth ? (
+              <>
+                {" "}
+                <Button
+                  className=" float-right  mr-12 bg-[#0d2235]"
+                  size="lg"
+                  roundedBottom={"none"}
+                  roundedTop={"3xl"}
+                  background={"#0d2235"}
+                  onClick={signInWithGoogle}
+                >
+                  <p className="text-3xl ">
+                    <CiShoppingCart size={30} color="teal" />
+                  </p>
+                </Button>
+              </>
+            ) : (
+              <Link to="/Cart">
+                <Button
+                  className=" float-right mr-12 "
+                  size="lg"
+                  roundedBottom={"none"}
+                  roundedTop={"3xl"}
+                >
+                  <p className="text-3xl ">
+                    <CiShoppingCart size={30} color="teal" />
+                  </p>
+                </Button>
+              </Link>
+            )}
           </Parallax>
         </Box>
-        {!userAuth ? (
-          <>
-            {" "}
-            <Button
-              className=" float-right mt-14 mr-16"
-              size="lg"
-              background={"teal.200"}
-              onClick={signInWithGoogle}
-            >
-              <p className="text-3xl ">
-                <CiShoppingCart size={30} color="teal" />
-              </p>
-            </Button>
-          </>
-        ) : (
-          <Link to="/Cart">
-            <Button className=" float-right mt-14 mr-16" size="lg">
-              <p className="text-3xl ">
-                <CiShoppingCart size={30} color="teal" />
-              </p>
-            </Button>
-          </Link>
-        )}
 
         <figure>
           <Text className="text-center py-5 text-4xl font-orbitron text-teal-100">
@@ -370,7 +378,7 @@ function Merch() {
                             </p>
                             {post.type}
                           </p>
-                          <p className="px-2 text-teal-900 font-bold font-poppins flex">
+                          {/* <p className="px-2 text-teal-900 font-bold font-poppins flex">
                             <p className="text-teal-950 font-bold pr-2">
                               Item Stocks:
                             </p>
@@ -387,7 +395,7 @@ function Merch() {
                                 </button>
                               )}
                             </p>
-                          </p>
+                          </p> */}
                           <div>
                             <Button
                               left={2}
