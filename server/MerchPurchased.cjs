@@ -29,6 +29,9 @@ const purchasedMerch = new Schema ({
     image: {
         type: String,
     },
+    sizes: {
+        type: String,
+    },
 });
 
 const MerchPurchased = mongoose.model('MerchPurchased', purchasedMerch);

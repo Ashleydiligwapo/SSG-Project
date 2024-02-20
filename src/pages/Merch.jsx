@@ -65,6 +65,7 @@ function Merch() {
     name: "",
     prices: "",
     image: "",
+    sizes: "",
   });
 
   const signInWithGoogle = (e) => {
@@ -150,6 +151,7 @@ function Merch() {
           name: "",
           prices: "",
           image: "",
+          sizes: "",
         });
         navigate("/Merch");
       })
@@ -500,6 +502,28 @@ function Merch() {
                     }}
                   />
 
+                  <label className="text-teal-950">Sizes:</label>
+                  <select
+                    className="py-3 px-3 border-solid border-2 rounded-md"
+                    type="text"
+                    name="sizes"
+                    value={purchasedMerch.sizes}
+                    onChange={(e) => {
+                      setPurchasedMerch({
+                        ...purchasedMerch,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
+                    placeholder="Input Sizes"
+                    required
+                  >
+                    <option value="Xtra-Small">Xtra-Small</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    <option value="Xtra-Large">Xtra-Large</option>
+                  </select>
+
                   <label className="text-teal-950">Department:</label>
                   <select
                     className="py-3 px-3 border-solid border-2 rounded-md"
@@ -526,9 +550,6 @@ function Merch() {
                     </option>
                     <option value="College of Technology ">
                       College of Technology
-                    </option>
-                    <option value="College of Tourism ">
-                      College of Tourism
                     </option>
                   </select>
                   <label>CTU ID:</label>
